@@ -12,6 +12,7 @@ import {rootReducer} from "./reducers/root.reducer";
 import Orders from "./orders/Orders";
 import {appConstants} from "./constants/constants";
 import EditOrder from "./orders/EditOrder";
+import Login from "./login/Login";
 
 const createStoreWithMiddleware = applyMiddleware(reduxPromise)(createStore);
 
@@ -21,11 +22,10 @@ ReactDOM.render(
             <App>
                 <Switch>
                     <Route path={appConstants.orderRoute} component={Orders}/>
-
+                    <Route path={`${appConstants.editOrderRoute}/:id`} component={EditOrder}></Route>
                     {/*<Route path={appConstants.addProductRoute} component={withGuard(AddProduct)}/>*/}
 
-                    {/*<Route path={appConstants.loginRoute} component={Login}/>*/}
-                    <Route path={`${appConstants.editOrderRoute}/:id`} component={EditOrder}></Route>
+                    <Route path={appConstants.loginRoute} component={Login}/>
                     <Redirect path="*" to={appConstants.orderRoute}></Redirect>
                 </Switch>
             </App>

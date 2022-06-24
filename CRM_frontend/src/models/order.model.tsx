@@ -10,4 +10,5 @@ export interface OrderModel {
 
 export interface ReduxState {
     orders: OrderModel [];
+    user: {email: string};
 }

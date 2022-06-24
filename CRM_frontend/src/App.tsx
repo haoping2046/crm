@@ -1,8 +1,14 @@
 import React, {Component} from 'react';
 import Header from "./header/Header";
+import {checkLogin} from "./actions/auth.action";
+import {connect} from "react-redux";
 
 class App extends Component<any, any>{
-  render() {
+    componentDidMount() {
+        this.props.checkLogin();
+    }
+
+    render() {
     return (
         <>
             <Header/>
@@ -13,7 +19,7 @@ class App extends Component<any, any>{
             </main>
         </>
     );
-  }
+    }
 }
 
-export default App;
+export default connect(null, {checkLogin})(App) ;;

@@ -16,12 +16,34 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import com.devote.crm.security.handler.AccessDeniedHandlerImpl;
+import com.devote.crm.security.handler.AuthenticationEntryPointImpl;
+import com.devote.crm.security.handler.AuthenticationFailureHandlerImpl;
+import com.devote.crm.security.handler.AuthenticationSuccessHandlerImpl;
+import com.devote.crm.security.handler.LogoutSuccessHandlerImpl;
+
+
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	private UserDetailsService userDetailsServiceImpl;
+	
+	@Autowired
+	private AccessDeniedHandlerImpl accessDeniedHandlerImpl;
+	
+	@Autowired
+	private AuthenticationEntryPointImpl authenticationEntryPointImpl;
+	
+	@Autowired
+	private LogoutSuccessHandlerImpl logoutSuccessHandlerImpl;
+	
+	@Autowired
+	private AuthenticationSuccessHandlerImpl authenticationSuccessHandlerImpl;
+
+	@Autowired
+	private AuthenticationFailureHandlerImpl authenticationFailureHandlerImpl;
 	
 	public void configure(HttpSecurity http) throws Exception {
 		http.csrf()
@@ -35,7 +57,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.formLogin()
 			.usernameParameter("email")
 			.passwordParameter("password")
-		;
+			.successHandler(authenticationSuccessHandlerImpl)   
+			.failureHandler(authenticationFailureHandlerImpl);
+		
+		http.logout()
+			.permitAll()
+			.logoutUrl("/logout")
+			.logoutSuccessHandler(logoutSuccessHandlerImpl);
+		
+//		http.exceptionHandling()
+//			.accessDeniedHandler(accessDeniedHandlerImpl)
+//			.authenticationEntryPoint(authenticationEntryPointImpl);
 		
 		http.httpBasic();
 	}
