@@ -3,12 +3,13 @@ import {OrderModel, ReduxState} from "../models/order.model";
 import {AxiosResponse} from "axios";
 import {connect} from "react-redux";
 import {getOrders} from "../actions/orders.action";
+import {Link} from "react-router-dom";
+import {appConstants} from "../constants/constants";
 
 class Orders extends Component<OrdersProps, any> {
 
     componentDidMount() {
         this.props.getOrders();
-        console.log(this.props.orders)
     }
 
     render() {
@@ -22,6 +23,7 @@ class Orders extends Component<OrdersProps, any> {
                     <th>purchase date</th>
                     <th>approval status</th>
                     <th>discount</th>
+                    <th>operation</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -35,8 +37,12 @@ class Orders extends Component<OrdersProps, any> {
                                 <td>{order.purchase_date}</td>
                                 <td>{order.approval_status}</td>
                                 <td>{order.discount}</td>
+                                <td>
+                                    <Link className="nav-link"
+                                          to={`${appConstants.editOrderRoute}/${order.id}`}>modify</Link>
+                                </td>
                             </tr>
-                        )
+                        );
                     })
                 }
                 </tbody>

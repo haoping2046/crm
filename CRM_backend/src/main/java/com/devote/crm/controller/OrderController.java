@@ -20,7 +20,7 @@ public class OrderController {
 	@Autowired
 	private OrderService orderService;
 	
-	@PreAuthorize("hasAuthority('admin')")
+//	@PreAuthorize("hasAuthority('admin')")
 	@GetMapping
 	public List<Order> getAll() {
 		return orderService.getAll();
