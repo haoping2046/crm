@@ -13,6 +13,7 @@ import Orders from "./orders/Orders";
 import {appConstants} from "./constants/constants";
 import EditOrder from "./orders/EditOrder";
 import Login from "./login/Login";
+import {withGuard} from "./hocs/withGuard";
 
 const createStoreWithMiddleware = applyMiddleware(reduxPromise)(createStore);
 
@@ -21,7 +22,7 @@ ReactDOM.render(
         <BrowserRouter>
             <App>
                 <Switch>
-                    <Route path={appConstants.orderRoute} component={Orders}/>
+                    <Route path={appConstants.orderRoute} component={withGuard(Orders)}/>
                     <Route path={`${appConstants.editOrderRoute}/:id`} component={EditOrder}></Route>
                     {/*<Route path={appConstants.addProductRoute} component={withGuard(AddProduct)}/>*/}
 

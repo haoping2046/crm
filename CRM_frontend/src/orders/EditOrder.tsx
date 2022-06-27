@@ -82,6 +82,7 @@ class EditOrder extends Component<EditOrderProps, any> {
 }
 
 function mapStateToProps({orders}: ReduxState, ownProps: EditOrderProps) {
+    console.log(ownProps);
     const id = +ownProps.match.params.id;
     const order = Array.isArray(orders) && orders.find(o => o.id === id);
 

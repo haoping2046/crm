@@ -8,7 +8,6 @@ public class AuthenticationSuccessResponse extends Response {
 	public AuthenticationSuccessResponse(boolean success, int code, String message, User user) {
 		super(success, code, message);
 		this.user = user;
-		System.out.println(user);
 	}
 
 	public User getUser() {

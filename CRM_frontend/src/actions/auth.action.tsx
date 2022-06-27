@@ -3,10 +3,28 @@ import axios from 'axios';
 import qs from 'qs';
 
 // TODO learn fetch out
-export const login = (user: { email: string, password: string }) => {
+export const login = (
+    user: { email: string, password: string },
+    succeed: () => void,
+    fail: (msg: string) => void
+) => {
     const loginPromise = axios.post(
-        'http://localhost:8080/login',
-        qs.stringify(user));
+        // process.env.REACT_APP_API +'/login',
+        `${process.env.REACT_APP_API}/login`,
+        qs.stringify(user),
+        {
+            withCredentials: true  // carry cookie/set cookie
+        }
+
+    );
+
+
+    loginPromise
+        .then(res => {
+            res.data.success ? succeed() : fail(res.data.message);
+        })
+        .catch(err => fail(err.message))
+
     return {
         type: appConstants.LOGIN,
         payload: loginPromise
@@ -15,7 +33,7 @@ export const login = (user: { email: string, password: string }) => {
 
 export const checkLogin = () => {
     const checkLoginPromise = axios.get(
-        'http://localhost:8080/checklogin',
+        `${process.env.REACT_APP_API}/checklogin`,
         {withCredentials: true}
     );
     return {

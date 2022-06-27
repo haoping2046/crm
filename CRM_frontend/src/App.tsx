@@ -22,4 +22,4 @@ class App extends Component<any, any>{
     }
 }
 
-export default connect(null, {checkLogin})(App) ;;
+export default connect(null, {checkLogin})(App);

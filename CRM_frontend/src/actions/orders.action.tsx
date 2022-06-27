@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const getOrders = () => {
     const getProductsPromise = axios.get(
-        'http://localhost:8080/orders'
+        `${process.env.REACT_APP_API}/orders`
     );
 
     return {

@@ -4,7 +4,7 @@ import {appConstants} from "../constants/constants";
 import {login} from "../actions/auth.action";
 import {RouteComponentProps} from "react-router-dom";
 
-const Login = () => {
+const Login = (props: LoginProps) => {
     // useState hook
     const [user, setUser] = useState({
         email: '',
@@ -21,13 +21,12 @@ const Login = () => {
 
     const submitHandler = (event: SyntheticEvent) => {
         event.preventDefault();
-        console.log(user);
-        dispatch(login(user));
-        // dispatch(login(
-        //     user,
-        //     () => props.history.push(appConstants.productRoute),
-        //     (msg: string) => console.log(msg)
-        // ))
+        dispatch(login(
+            user,
+            // () => props.history.goBack(),
+            () => props.history.push(appConstants.orderRoute),
+            (msg: string) => console.log(msg)
+        ));
     }
 
     return (

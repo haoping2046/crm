@@ -58,16 +58,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.usernameParameter("email")
 			.passwordParameter("password")
 			.successHandler(authenticationSuccessHandlerImpl)   
-			.failureHandler(authenticationFailureHandlerImpl);
+			.failureHandler(authenticationFailureHandlerImpl)
+			;
 		
 		http.logout()
 			.permitAll()
 			.logoutUrl("/logout")
 			.logoutSuccessHandler(logoutSuccessHandlerImpl);
 		
-//		http.exceptionHandling()
-//			.accessDeniedHandler(accessDeniedHandlerImpl)
-//			.authenticationEntryPoint(authenticationEntryPointImpl);
+		http.exceptionHandling()
+			.accessDeniedHandler(accessDeniedHandlerImpl)
+			.authenticationEntryPoint(authenticationEntryPointImpl);
 		
 		http.httpBasic();
 	}
