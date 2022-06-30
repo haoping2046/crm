@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './index.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -14,6 +14,9 @@ import {appConstants} from "./constants/constants";
 import EditOrder from "./orders/EditOrder";
 import Login from "./login/Login";
 import {withGuard} from "./hocs/withGuard";
+import Users from "./user/Users";
+import AddUser from "./user/AddUser";
+import {ProjectListScreen} from "./products";
 
 const createStoreWithMiddleware = applyMiddleware(reduxPromise)(createStore);
 
@@ -23,11 +26,12 @@ ReactDOM.render(
             <App>
                 <Switch>
                     <Route path={appConstants.orderRoute} component={withGuard(Orders)}/>
-                    <Route path={`${appConstants.editOrderRoute}/:id`} component={EditOrder}></Route>
-                    {/*<Route path={appConstants.addProductRoute} component={withGuard(AddProduct)}/>*/}
-
+                    <Route path={`${appConstants.editOrderRoute}/:id`} component={EditOrder}/>
                     <Route path={appConstants.loginRoute} component={Login}/>
-                    <Redirect path="*" to={appConstants.orderRoute}></Redirect>
+                    <Route path={appConstants.userRoute} component={Users}/>
+                    <Route path={appConstants.addUserRoute} component={AddUser}/>
+                    <Route path={appConstants.testRoute} component={ProjectListScreen}/>
+                    <Redirect path="*" to={appConstants.orderRoute}/>
                 </Switch>
             </App>
         </BrowserRouter>

@@ -11,7 +11,7 @@ const Header = () => {
             <a href="#" className="navbar-brand">CRM</a>
             <ul className="nav navbar-nav">
                 <li className="nav-item">
-                    <NavLink className="nav-link" to={appConstants.orderRoute}>
+                    <NavLink className="nav-link" to={appConstants.testRoute}>
                         Home
                     </NavLink>
                 </li>
@@ -31,8 +31,8 @@ const Header = () => {
                     </NavLink>
                 </li>
                 <li className="nav-item">
-                    <NavLink className="nav-link" to={appConstants.orderRoute}>
-                        Others
+                    <NavLink className="nav-link" to={appConstants.userRoute}>
+                        User
                     </NavLink>
                 </li>
             </ul>

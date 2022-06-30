@@ -3,6 +3,7 @@ import {useDispatch} from "react-redux";
 import {appConstants} from "../constants/constants";
 import {login} from "../actions/auth.action";
 import {RouteComponentProps} from "react-router-dom";
+import css from './Login.module.scss';
 
 const Login = (props: LoginProps) => {
     // useState hook
@@ -23,17 +24,21 @@ const Login = (props: LoginProps) => {
         event.preventDefault();
         dispatch(login(
             user,
-            // () => props.history.goBack(),
-            () => props.history.push(appConstants.orderRoute),
+            () => props.history.goBack(),
+            // () => props.history.push(appConstants.orderRoute),
             (msg: string) => console.log(msg)
         ));
     }
-
+    // for-group
     return (
         <>
-            <form className="for-group" onSubmit={submitHandler}>
-                <input onChange={updateHandler} value={user.email} id="email" className="form-control" type="text" />
+            <form className={css.Login} onSubmit={submitHandler}>
+                <label htmlFor="email">Email:</label>
+                <input onChange={updateHandler} value={user.email} id="email" className="form-control" type="email" />
+
+                <label htmlFor="password">Password:</label>
                 <input onChange={updateHandler} value={user.password} id="password" className="form-control" type="password"/>
+
                 <button className="btn btn-success">Login</button>
             </form>
         </>

@@ -18,7 +18,6 @@ export const login = (
 
     );
 
-
     loginPromise
         .then(res => {
             res.data.success ? succeed() : fail(res.data.message);

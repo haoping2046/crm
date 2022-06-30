@@ -1,19 +1,23 @@
 package com.devote.crm.bean;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="SALES_ORDER")
 public class Order {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
 	@Column
@@ -33,6 +37,10 @@ public class Order {
 	
 	@Column
 	private int discount;
+	
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "order")
+	private List<OrderProduct> purchases;
+
 
 	public Order() {
 		super();
@@ -40,7 +48,7 @@ public class Order {
 	}
 
 	public Order(int id, int customer_id, int product_id, int user_id, Date purchase_date, String approval_status,
-			int discount) {
+			int discount, List<OrderProduct> purchases) {
 		super();
 		this.id = id;
 		this.customer_id = customer_id;
@@ -49,6 +57,7 @@ public class Order {
 		this.purchase_date = purchase_date;
 		this.approval_status = approval_status;
 		this.discount = discount;
+		this.purchases = purchases;
 	}
 
 	public int getId() {
@@ -107,6 +116,13 @@ public class Order {
 		this.discount = discount;
 	}
 	
+	public List<OrderProduct> getPurchases() {
+		return purchases;
+	}
+
+	public void setPurchases(List<OrderProduct> purchases) {
+		this.purchases = purchases;
+	}
 	
 
 }
