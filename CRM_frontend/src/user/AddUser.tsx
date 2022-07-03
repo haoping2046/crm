@@ -8,14 +8,11 @@ import {useDispatch} from "react-redux";
 
 
 const AddUser = (props: AddUserProps) => {
-    // const handleSubmit = () => {
-    //
-    // }
     const [user, setUser] = useState({
         email: '',
         password: '',
-        tid: '',
-        type: ''
+        profiles: [{id: '', type: ''}],
+
     })
     const dispatch = useDispatch();
 
@@ -30,6 +27,28 @@ const AddUser = (props: AddUserProps) => {
     const updateHandler = (event: SyntheticEvent) => {
         const ele = event.target as HTMLInputElement;
         setUser({...user, [ele.id]: ele.value})
+        // setUser({...user, [ele.id]: ele.value,
+        //     profiles: {...user.profiles, [ele.id]: ele.value}
+        // })
+    }
+
+    const updateHandler2 = (event: SyntheticEvent) => {
+        const ele = event.target as HTMLInputElement;
+        // console.log(ele.id, ele.value);
+        user.profiles[0].type = ele.value;
+        setUser({...user});
+        // setUser({...user, profiles: [...user.profiles, [ele.id]: ele.value]})
+
+    }
+
+    const updateHandler3 = (event: SyntheticEvent) => {
+        const ele = event.target as HTMLInputElement;
+        //profiles: {...user.profiles, [ele.id]: ele.value}
+        // console.log(ele.id, ele.value);
+        user.profiles[0].id = ele.value;
+        setUser({...user});
+        // setUser({...user, [ele.id]: ele.value})
+        console.log(user);
     }
 
     return(
@@ -41,10 +60,10 @@ const AddUser = (props: AddUserProps) => {
             <input value={user.password} onChange={updateHandler} type="text" name="password" id="password"/>
 
             <label>Type</label>
-            <input value={user.type} onChange={updateHandler} type="text" name="type" id="type"/>
+            <input value={user.profiles[0].type} onChange={updateHandler2} type="text" name="type" id="type"/>
 
             <label>Type Id</label>
-            <input value={user.tid} onChange={updateHandler} type="text" name="tid" id="tid"/>
+            <input value={user.profiles[0].id} onChange={updateHandler3} type="text" name="id" id="id"/>
 
             <button className="btn btn-primary">Save</button>
         </form>

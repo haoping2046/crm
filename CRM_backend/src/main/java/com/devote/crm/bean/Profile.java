@@ -23,9 +23,6 @@ public class Profile implements GrantedAuthority {
 	@Column
 	private String type;
 	
-//	@ManyToMany(mappedBy="profiles")
-//	private List<User> users;
-	
 	public Profile() {
 		super();
 	}

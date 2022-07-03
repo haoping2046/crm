@@ -6,6 +6,19 @@ export interface OrderModel {
     purchase_date: string;
     approval_status: string;
     discount: number;
+    purchases: PurchaseModel [];
+}
+
+export interface PurchaseModel {
+    id: number;
+    product: ProductModel;
+    qty: number
+}
+
+export interface ProductModel {
+    id: number;
+    name: string;
+    price: number
 }
 
 export interface ReduxState {

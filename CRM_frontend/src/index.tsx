@@ -25,7 +25,8 @@ ReactDOM.render(
         <BrowserRouter>
             <App>
                 <Switch>
-                    <Route path={appConstants.orderRoute} component={withGuard(Orders)}/>
+                    {/*{withGuard(Orders)}*/}
+                    <Route path={appConstants.orderRoute} component={Orders}/>
                     <Route path={`${appConstants.editOrderRoute}/:id`} component={EditOrder}/>
                     <Route path={appConstants.loginRoute} component={Login}/>
                     <Route path={appConstants.userRoute} component={Users}/>

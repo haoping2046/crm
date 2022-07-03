@@ -2,6 +2,7 @@ import {appConstants} from "../constants/constants";
 import axios from "axios";
 import qs from 'qs';
 import {string} from "yup";
+import {ProfileModel} from "../models/user.model";
 
 export const getUsers = () => {
     const getUsersPromise = axios.get(
@@ -14,14 +15,15 @@ export const getUsers = () => {
 }
 
 export const addUser = (
-    user: {email: string, password: string, tid: string, type: string},
+    user: {email: string, password: string, profiles: {id: string, type: string}[]},
     succeed: () => void,
     fail: (msg: string) => void
 ) => {
-    console.log('>>>>>' + qs.stringify(user));
+    console.log(user);
     const addUsersPromise = axios.post(
         `${process.env.REACT_APP_API}/users`,
-        qs.stringify(user),
+        user,
+
         {
             withCredentials: true
         }

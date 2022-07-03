@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="ORDER_PRODUCT")
 public class OrderProduct {
@@ -48,6 +50,7 @@ public class OrderProduct {
 		this.id = id;
 	}
 
+	@JsonIgnore
 	public Order getOrder() {
 		return order;
 	}

@@ -28,11 +28,19 @@ class Orders extends Component<OrdersProps, any> {
                 </thead>
                 <tbody>
                 {
+                    // .map((purchase)=>{purchase.product.name})
                     this.props.orders?.map((order) => {
                         return (
                             <tr key={order.id}>
                                 <td>{order.customer_id}</td>
-                                <td>{order.product_id}</td>
+                                <td>{order.purchases.map((p) => {
+                                    return (
+                                        <>
+                                            {`${p.product.name}, `}
+
+                                        </>
+                                    )
+                                })}</td>
                                 <td>{order.user_id}</td>
                                 <td>{order.purchase_date}</td>
                                 <td>{order.approval_status}</td>
@@ -47,6 +55,7 @@ class Orders extends Component<OrdersProps, any> {
                 }
                 </tbody>
             </table>
+
         );
     }
 }
