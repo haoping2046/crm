@@ -1,6 +1,5 @@
 import React, {SyntheticEvent, useState} from 'react';
 import {useDispatch} from "react-redux";
-import {appConstants} from "../constants/constants";
 import {login} from "../actions/auth.action";
 import {RouteComponentProps} from "react-router-dom";
 import css from './Login.module.scss';

@@ -15,7 +15,6 @@ export const login = (
         {
             withCredentials: true  // carry cookie/set cookie
         }
-
     );
 
     loginPromise
@@ -38,5 +37,22 @@ export const checkLogin = () => {
     return {
         type: appConstants.CHECK_LOGIN,
         payload: checkLoginPromise
+    }
+}
+
+export const logout = (
+    succeed: () => void,
+    fail: (msg: string) => void
+) => {
+    const loginPromise = axios.get(
+        `${process.env.REACT_APP_API}/logout`,
+        {withCredentials: true}
+    ).then(res => {
+        res.data.success ? succeed() : fail(res.data.message);
+    }).catch(err => fail(err.message));
+
+    return {
+        type: appConstants.LOGOUT,
+        payload: loginPromise
     }
 }

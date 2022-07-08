@@ -13,10 +13,10 @@ import Orders from "./orders/Orders";
 import {appConstants} from "./constants/constants";
 import EditOrder from "./orders/EditOrder";
 import Login from "./login/Login";
-import {withGuard} from "./hocs/withGuard";
 import Users from "./user/Users";
 import AddUser from "./user/AddUser";
 import {ProjectListScreen} from "./products";
+import Logout from "./login/Logout";
 
 const createStoreWithMiddleware = applyMiddleware(reduxPromise)(createStore);
 
@@ -29,6 +29,7 @@ ReactDOM.render(
                     <Route path={appConstants.orderRoute} component={Orders}/>
                     <Route path={`${appConstants.editOrderRoute}/:id`} component={EditOrder}/>
                     <Route path={appConstants.loginRoute} component={Login}/>
+                    <Route path={appConstants.logoutRoute} component={Logout}/>
                     <Route path={appConstants.userRoute} component={Users}/>
                     <Route path={appConstants.addUserRoute} component={AddUser}/>
                     <Route path={appConstants.testRoute} component={ProjectListScreen}/>

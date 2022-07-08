@@ -50,14 +50,6 @@ public class Profile implements GrantedAuthority {
 	public void setType(String type) {
 		this.type = type;
 	}
-	
-//	public List<User> getUsers() {
-//		return users;
-//	}
-//
-//	public void setUsers(List<User> users) {
-//		this.users = users;
-//	}
 
 	@Override
 	public String toString() {

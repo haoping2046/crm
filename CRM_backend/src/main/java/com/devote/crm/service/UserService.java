@@ -26,7 +26,6 @@ public class UserService {
 	}
 	
 	public Response addUser(User user) {
-		System.out.print(user);
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		
 		user.setProfiles(user.getProfiles()); 

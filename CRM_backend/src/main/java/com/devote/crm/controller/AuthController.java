@@ -18,4 +18,5 @@ public class AuthController {
 	public Response checklogin(Authentication authentication) {
 		return authService.checklogin(authentication);
 	}
+	
 }

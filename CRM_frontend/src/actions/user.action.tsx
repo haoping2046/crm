@@ -1,8 +1,5 @@
 import {appConstants} from "../constants/constants";
 import axios from "axios";
-import qs from 'qs';
-import {string} from "yup";
-import {ProfileModel} from "../models/user.model";
 
 export const getUsers = () => {
     const getUsersPromise = axios.get(
@@ -19,7 +16,6 @@ export const addUser = (
     succeed: () => void,
     fail: (msg: string) => void
 ) => {
-    console.log(user);
     const addUsersPromise = axios.post(
         `${process.env.REACT_APP_API}/users`,
         user,

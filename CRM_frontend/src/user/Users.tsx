@@ -1,4 +1,4 @@
-import React, {Component, SyntheticEvent, useEffect, useState} from "react";
+import React, {SyntheticEvent, useEffect} from "react";
 import {ReduxState} from "../models/user.model";
 import {RouteComponentProps} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
@@ -36,7 +36,13 @@ const Users = (props: UserProps) => {
                         return (
                             <tr key={user.id}>
                                 <td>{user.email}</td>
-                                <td>{user.profiles[0].type}</td>
+                                <td>{user.profiles.map((p, index) => {
+                                    return (
+                                        <span key={p.id}>
+                                            {(index ? ', ' : '') + p.type}
+                                        </span>
+                                    )
+                                })}</td>
                                 <td>{user.enabled? "true" : "false"}</td>
                             </tr>
                         )

@@ -44,7 +44,7 @@ const Header = () => {
                             <NavLink className="nav-link" to={appConstants.loginRoute}>
                                 Login
                             </NavLink>:
-                            <NavLink className="nav-link" to={appConstants.loginRoute}>
+                            <NavLink className="nav-link" to={appConstants.logoutRoute}>
                                 Logout
                             </NavLink>
                     }
