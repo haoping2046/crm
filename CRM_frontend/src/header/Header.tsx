@@ -2,6 +2,7 @@ import {NavLink} from "react-router-dom";
 import {appConstants} from "../constants/constants";
 import {useSelector} from "react-redux";
 import {ReduxState} from "../models/order.model";
+import ExitToAppSharpIcon from '@material-ui/icons/ExitToAppSharp';
 
 const Header = () => {
     const user = useSelector((state: ReduxState) => state.user);
@@ -46,6 +47,7 @@ const Header = () => {
                             </NavLink>:
                             <NavLink className="nav-link" to={appConstants.logoutRoute}>
                                 Logout
+                                <ExitToAppSharpIcon/>
                             </NavLink>
                     }
 

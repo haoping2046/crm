@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Header from "./header/Header";
 import {checkLogin} from "./actions/auth.action";
 import {connect} from "react-redux";
+import Container from '@material-ui/core/Container'
 
 class App extends Component<any, any>{
     componentDidMount() {
@@ -12,11 +13,14 @@ class App extends Component<any, any>{
     return (
         <>
             <Header/>
-            <main>
-                {
-                  this.props.children
-                }
-            </main>
+            <Container>
+                <main>
+                    {
+                        this.props.children
+                    }
+                </main>
+            </Container>
+
         </>
     );
     }
