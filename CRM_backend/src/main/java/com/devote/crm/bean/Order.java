@@ -38,6 +38,9 @@ public class Order {
 	@Column
 	private int discount;
 	
+	@Column
+	private String title;
+	
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "order")
 	private List<OrderProduct> purchases;
 
@@ -48,7 +51,7 @@ public class Order {
 	}
 
 	public Order(int id, int customer_id, int product_id, int user_id, Date purchase_date, String approval_status,
-			int discount, List<OrderProduct> purchases) {
+			int discount, List<OrderProduct> purchases, String title) {
 		super();
 		this.id = id;
 		this.customer_id = customer_id;
@@ -58,6 +61,7 @@ public class Order {
 		this.approval_status = approval_status;
 		this.discount = discount;
 		this.purchases = purchases;
+		this.title = title;
 	}
 
 	public int getId() {
@@ -123,6 +127,15 @@ public class Order {
 	public void setPurchases(List<OrderProduct> purchases) {
 		this.purchases = purchases;
 	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	
 	
 
 }

@@ -12,7 +12,7 @@ const Header = () => {
             <a href="#" className="navbar-brand">CRM</a>
             <ul className="nav navbar-nav">
                 <li className="nav-item">
-                    <NavLink className="nav-link" to={appConstants.testRoute}>
+                    <NavLink className="nav-link" to={appConstants.homeRoute}>
                         Home
                     </NavLink>
                 </li>

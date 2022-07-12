@@ -24,8 +24,10 @@ class O {
 
 class A {
 	public static void main(String args[]) {
+
 		O a = new O();
 		O.B b = a.new B();
+
 		b.foo();
 //		O.B bb = new O.B();
 	}

@@ -25,7 +25,6 @@ const Users = (props: UserProps) => {
     useEffect(() => {
         dispatch(getUsers());
     }, [])
-
     const addHandle = (event: SyntheticEvent) => {
         props.history.push(appConstants.addUserRoute);
     }

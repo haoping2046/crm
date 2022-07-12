@@ -25,6 +25,7 @@ const Orders = (props: OrdersProps) => {
             <table className="table table-striped table-bordered">
                 <thead>
                 <tr>
+                    <th>title</th>
                     <th>customer id</th>
                     <th>product name</th>
                     <th>user id</th>
@@ -38,31 +39,30 @@ const Orders = (props: OrdersProps) => {
                 {
                     orders?.map((order) => {
                         return (
-                            <>
-                                <tr key={order.id}>
-                                    <td>{order.customer_id}</td>
-                                    <td>{order.purchases.map((p, index) => {
-                                        return (
-                                            <span key={p.product.id}>
-                                        {(index ? ', ' : '') + p.product.name}
-                                    </span>
-                                        )
-                                    })}</td>
-                                    <td>{order.user_id}</td>
-                                    <td>{order.purchase_date.substring(0, 10)}</td>
-                                    <td>{order.approval_status}</td>
-                                    <td>{order.discount}</td>
-                                    <td>
-                                        <IconButton aria-label="edit" component={Link} to={`${appConstants.editOrderRoute}/${order.id}`}>
-                                            <EditIcon />
-                                        </IconButton>
+                            <tr key={order.id}>
+                                <td>{order.title}</td>
+                                <td>{order.customer_id}</td>
+                                <td>{order.purchases?.map((p, index) => {
+                                    return (
+                                        <span key={p.product.id}>
+                                            {(index ? ', ' : '') + p.product.name}
+                                        </span>
+                                    )
+                                })}</td>
+                                <td>{order.user_id}</td>
+                                <td>{order.purchase_date.substring(0, 10)}</td>
+                                <td>{order.approval_status}</td>
+                                <td>{order.discount}</td>
+                                <td>
+                                    <IconButton aria-label="edit" component={Link} to={`${appConstants.editOrderRoute}/${order.id}`}>
+                                        <EditIcon />
+                                    </IconButton>
 
-                                        <IconButton aria-label="delete" component={Link} to={`${appConstants.editOrderRoute}/${order.id}`}>
-                                            <DeleteIcon />
-                                        </IconButton>
-                                    </td>
-                                </tr>
-                            </>
+                                    <IconButton aria-label="delete" component={Link} to={`${appConstants.editOrderRoute}/${order.id}`}>
+                                        <DeleteIcon />
+                                    </IconButton>
+                                </td>
+                            </tr>
                         );
                     })
                 }

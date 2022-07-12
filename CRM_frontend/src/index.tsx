@@ -18,6 +18,7 @@ import AddUser from "./user/AddUser";
 import {ProjectListScreen} from "./products";
 import Logout from "./login/Logout";
 import Test from "./test/Test";
+import Home from "./home/Home";
 
 const createStoreWithMiddleware = applyMiddleware(reduxPromise)(createStore);
 
@@ -33,6 +34,7 @@ ReactDOM.render(
                     <Route path={appConstants.logoutRoute} component={Logout}/>
                     <Route path={appConstants.userRoute} component={Users}/>
                     <Route path={appConstants.addUserRoute} component={AddUser}/>
+                    <Route path={appConstants.homeRoute} component={Home}/>
                     <Route path={appConstants.testRoute} component={Test}/>
                     <Redirect path="*" to={appConstants.orderRoute}/>
                 </Switch>
