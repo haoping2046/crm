@@ -21,13 +21,13 @@ const Header = () => {
                         Order
                     </NavLink>
                 </li>
+                {/*<li className="nav-item">*/}
+                {/*    <NavLink className="nav-link" to={appConstants.orderRoute}>*/}
+                {/*        Plan*/}
+                {/*    </NavLink>*/}
+                {/*</li>*/}
                 <li className="nav-item">
-                    <NavLink className="nav-link" to={appConstants.orderRoute}>
-                        Plan
-                    </NavLink>
-                </li>
-                <li className="nav-item">
-                    <NavLink className="nav-link" to={appConstants.orderRoute}>
+                    <NavLink className="nav-link" to={appConstants.customerRoute}>
                         Customer
                     </NavLink>
                 </li>

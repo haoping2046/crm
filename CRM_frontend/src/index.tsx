@@ -15,10 +15,10 @@ import EditOrder from "./orders/EditOrder";
 import Login from "./login/Login";
 import Users from "./user/Users";
 import AddUser from "./user/AddUser";
-import {ProjectListScreen} from "./products";
 import Logout from "./login/Logout";
 import Test from "./test/Test";
 import Home from "./home/Home";
+import Customers from "./customers/Customers";
 
 const createStoreWithMiddleware = applyMiddleware(reduxPromise)(createStore);
 
@@ -35,6 +35,7 @@ ReactDOM.render(
                     <Route path={appConstants.userRoute} component={Users}/>
                     <Route path={appConstants.addUserRoute} component={AddUser}/>
                     <Route path={appConstants.homeRoute} component={Home}/>
+                    <Route path={appConstants.customerRoute} component={Customers}/>
                     <Route path={appConstants.testRoute} component={Test}/>
                     <Redirect path="*" to={appConstants.orderRoute}/>
                 </Switch>

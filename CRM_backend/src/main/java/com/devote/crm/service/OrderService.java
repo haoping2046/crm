@@ -91,4 +91,13 @@ public class OrderService {
     public void deleteOrderProducts(List<OrderProduct> purchases) {
         orderProductDao.deleteAll(purchases);
     }
+    
+    public Response deleteOrder(int id) {
+    	if(orderDao.findById(id).get() != null) {
+    		orderDao.deleteById(id);
+    		return new Response(true);
+    	} else {
+    		return new Response(false, "Order is not found!");
+    	}
+    }
 }

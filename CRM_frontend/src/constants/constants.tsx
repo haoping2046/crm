@@ -6,6 +6,7 @@ export const appConstants = {
     userRoute: "/users",
     addUserRoute: "/add-user",
     homeRoute: "/home",
+    customerRoute: "/customers",
 
     // TODO: delete
     testRoute: "/test",
@@ -17,6 +18,7 @@ export const appConstants = {
     GET_USER: 'GET_USER',
     ADD_USER: 'ADD_USER',
     GET_CUSTOMER: 'GET_CUSTOMER',
+    DELETE_ORDER: 'DELETE_ORDER',
 
     admin: 'admin',
     salesLeader: 'sales leader',

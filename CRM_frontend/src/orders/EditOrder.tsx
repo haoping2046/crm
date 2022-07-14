@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useLayoutEffect } from "react";
-import {OrderModel, ReduxState} from "../models/order.model";
+import {OrderModel, PurchaseModel, ReduxState} from "../models/order.model";
 import {RouteComponentProps} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {getOrders} from "../actions/orders.action";
@@ -26,36 +26,28 @@ const editOrderSchema = Yup.object().shape({
 const EditOrder = (props: EditOrderProps) => {
     const classes = useFormStyles();
     const dispatch = useDispatch();
-    // const orders = useSelector((state: ReduxState) => state.orders);
-    // const currentOrder = Array.isArray(orders) && orders.find(o => o.id === +props.match.params.id)
-
-    // const isOrdersLoaded = useSelector((state: ReduxState) =>
-    //     state.orders != null
-    // );
     const currentOrder = useSelector((state: ReduxState) =>
         Array.isArray(state.orders) && state.orders.find(o => o.id === +props.match.params.id)
     );
-    const [order, setOrder] = useState(currentOrder);
 
-    // const doSomething = () => {
-    //     setOrder(currentOrder);
-    // }
-    // useEffect(() => {
-    //     doSomething()
-    // }, [order])
+    const [order, setOrder] = useState({
+        title: '',
+        customer_id: 0,
+        product_id: 0,
+        user_id: 0,
+        purchase_date: '',
+        approval_status: '',
+        discount: 0,
+        purchases: [{}],
+    });
 
     useEffect(() => {
         !props.isOrdersLoaded && dispatch(getOrders());
     },[]);
 
-    // const getData = () => {
-    //     const newOrder = currentOrder;
-    //     setOrder(newOrder)
-    // }
-
     const formik = useFormik({
         enableReinitialize: true, // initialize and render
-        initialValues: {...order},
+        initialValues: {...order, ...currentOrder},
         validationSchema: editOrderSchema,
         onSubmit: (values) => {
             // alert(JSON.stringify(values, null, 2));
@@ -65,7 +57,6 @@ const EditOrder = (props: EditOrderProps) => {
 
     return (
         <>
-            {console.log(currentOrder)}
             <Card className={classes.form} elevation={3}>
                 <CardContent>
                     {
@@ -76,8 +67,8 @@ const EditOrder = (props: EditOrderProps) => {
                                 </Typography>
                                 <TextField required fullWidth id="title" name="title" label="Title" type="text" variant="outlined"
                                            value={formik.values.title} onChange={formik.handleChange} onBlur={formik.handleBlur}
-                                           error={formik.touched.customer_id && Boolean(formik.errors.customer_id)}
-                                           helperText={formik.touched.customer_id && formik.errors.customer_id}/>
+                                           error={formik.touched.title && Boolean(formik.errors.title)}
+                                           helperText={formik.touched.title && formik.errors.title}/>
                                 <TextField required fullWidth id="customer_id" name="customer_id" label="Customer name" type="text" variant="outlined"
                                            value={formik.values.customer_id} onChange={formik.handleChange} onBlur={formik.handleBlur}
                                            error={formik.touched.customer_id && Boolean(formik.errors.customer_id)}

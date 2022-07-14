@@ -11,3 +11,19 @@ export const getOrders = () => {
         payload: getProductsPromise
     }
 }
+
+export const deleteOrder = (
+    id: number,
+    succeed: () => void,
+    fail: (msg: string) => void
+) => {
+    const deleteOrderPromise = axios.delete(
+        `${process.env.REACT_APP_API}/orders/${id}`
+    );
+
+    return {
+        type: appConstants.DELETE_ORDER,
+        payload: deleteOrderPromise
+    }
+}
+

@@ -43,7 +43,6 @@ public class OrderController {
 	
 	@DeleteMapping("/{id}")
 	public Response delete(@PathVariable int id) {
-		System.out.println("Order: " + id + " is fake deleted!");
-		return new Response(true, "Order: " + id + " is fake deleted!");
+		return orderService.deleteOrder(id);
 	}
 }
