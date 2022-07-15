@@ -2,7 +2,6 @@ import {appConstants} from "../constants/constants";
 import axios from 'axios';
 import qs from 'qs';
 
-// TODO learn fetch out
 export const login = (
     user: { email: string, password: string },
     succeed: () => void,

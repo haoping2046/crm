@@ -7,8 +7,8 @@ export const authReducer = (state: {username: string} | null = null, action: aut
             // return action.payload.data.success ? action.payload.data.user : null;
             return action.payload.data.success ? {email: 'admin@devote.com'}: null;
         case appConstants.CHECK_LOGIN:
-            // return action.payload.data.success ? action.payload.data.user: null;
-            return action.payload.data.success ? {email: 'admin@devote.com'}: null;
+            return action.payload.data.success ? action.payload.data.user: null;
+            // return action.payload.data.success ? {email: 'admin@devote.com'}: null;
         case appConstants.LOGOUT:
             // return action.payload.data.success ? action.payload.data.user : null;
             return null;

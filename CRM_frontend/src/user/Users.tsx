@@ -1,6 +1,6 @@
 import React, {SyntheticEvent, useEffect} from "react";
 import {ReduxState} from "../models/user.model";
-import {RouteComponentProps} from "react-router-dom";
+import {Link, RouteComponentProps} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {getUsers} from "../actions/user.action";
 import {appConstants} from "../constants/constants";
@@ -26,6 +26,7 @@ const Users = (props: UserProps) => {
         dispatch(getUsers());
     }, [])
     const addHandle = (event: SyntheticEvent) => {
+        event.preventDefault();
         props.history.push(appConstants.addUserRoute);
     }
 
@@ -34,9 +35,11 @@ const Users = (props: UserProps) => {
             <Typography className={classes.title} variant="h4" gutterBottom>
                 User
             </Typography>
-            <Button variant="contained" color="primary" className={classes.button} startIcon={<AddIcon />} onClick={addHandle}>
-                ADD USER
-            </Button>
+            <Link to={`${appConstants.addUserRoute}`}>
+                <Button variant="contained" color="primary" className={classes.button} startIcon={<AddIcon />}>
+                    ADD USER
+                </Button>
+            </Link>
 
             <table className="table table-striped table-bordered">
                 <thead>

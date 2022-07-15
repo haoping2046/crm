@@ -52,7 +52,7 @@ const Customers = (props: CustomersProps) => {
                 Customer
             </Typography>
 
-            <div style={{ height: 400, width: '100%' }}>
+            <div style={{ height: 440, width: '100%' }}>
                 <DataGrid
                     rows={rows}
                     columns={columns}

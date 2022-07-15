@@ -8,7 +8,7 @@ const Header = () => {
     const user = useSelector((state: ReduxState) => state.user);
 
     return (
-        <nav className="navbar navbar-dark bg-dark navbar-expand-lg">
+        <nav className="navbar navbar-dark bg-dark navbar-expand-lg" style={{marginBottom: "30px"}}>
             <a href="#" className="navbar-brand">CRM</a>
             <ul className="nav navbar-nav">
                 <li className="nav-item">

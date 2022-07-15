@@ -13,4 +13,5 @@ export interface ProfileModel {
 
 export interface ReduxState {
     userData: UserModel [];
+    user: {username: string};
 }

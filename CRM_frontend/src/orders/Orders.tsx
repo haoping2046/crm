@@ -52,7 +52,7 @@ const Orders = (props: OrdersProps) => {
     const [orders, setOrders] = useState(ordersData);
     useEffect(() => {
         dispatch(getOrders());
-    }, [orders])
+    }, [ordersData])
 
     // delete modal
     const classes = useStyles();
@@ -74,9 +74,7 @@ const Orders = (props: OrdersProps) => {
             (msg: string) => console.log(msg)
         ));
 
-        console.log(ordersData);
         let newOrder = ordersData.filter((o) => o.id !== id)
-        console.log(newOrder);
         setOrders({...orders, ...newOrder});
         handleClose();
     }

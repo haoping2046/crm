@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useLayoutEffect } from "react";
-import {OrderModel, PurchaseModel, ReduxState} from "../models/order.model";
+import {OrderModel, ReduxState} from "../models/order.model";
 import {RouteComponentProps} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {getOrders} from "../actions/orders.action";

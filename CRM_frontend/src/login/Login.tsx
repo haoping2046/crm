@@ -10,10 +10,11 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import * as Yup from "yup";
 import {useFormik} from "formik";
+import {appConstants} from "../constants/constants";
 
 const loginSchema = Yup.object().shape({
     email: Yup.string().email('Enter a valid email').required('Email is required'),
-    password: Yup.string().required('Password is required'),
+    password: Yup.string().min(4, "Password must be at least 4 characters").required('Password is required'),
 });
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -61,11 +62,10 @@ const Login = (props: LoginProps) => {
         initialValues: {...user},
         validationSchema: loginSchema,
         onSubmit: (values) => {
-            // alert(values);
-            alert(JSON.stringify(values, null, 2));
             dispatch(login(
                 values,
-                () => props.history.goBack(),
+                // () => props.history.goBack(),
+                () => props.history.push(appConstants.userRoute),
                 (msg: string) => console.log(msg)
             ));
         },
