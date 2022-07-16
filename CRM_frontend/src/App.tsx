@@ -6,6 +6,7 @@ import Container from '@material-ui/core/Container'
 
 class App extends Component<any, any>{
     componentDidMount() {
+        console.log("app.tsx")
         this.props.checkLogin();
     }
 

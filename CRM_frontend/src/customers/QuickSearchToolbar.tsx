@@ -1,4 +1,4 @@
-import {GridToolbarDensitySelector, GridToolbarExport, GridToolbarFilterButton} from "@material-ui/data-grid";
+import {GridToolbarExport, GridToolbarFilterButton} from "@material-ui/data-grid";
 import TextField from "@material-ui/core/TextField";
 import SearchIcon from "@material-ui/icons/Search";
 import IconButton from "@material-ui/core/IconButton";

@@ -1,4 +1,4 @@
-import React, {SyntheticEvent, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {ReduxState} from "../models/order.model";
 import {useDispatch, useSelector} from "react-redux";
 import {deleteOrder, getOrders} from "../actions/orders.action";
@@ -45,11 +45,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const Orders = (props: OrdersProps) => {
     const dispatch = useDispatch();
     const ordersData = useSelector((state: ReduxState) => state.orders)
-    useEffect(() => {
-        dispatch(getOrders());
-    }, [])
 
-    const [orders, setOrders] = useState(ordersData);
     useEffect(() => {
         dispatch(getOrders());
     }, [ordersData])
@@ -74,8 +70,6 @@ const Orders = (props: OrdersProps) => {
             (msg: string) => console.log(msg)
         ));
 
-        let newOrder = ordersData.filter((o) => o.id !== id)
-        setOrders({...orders, ...newOrder});
         handleClose();
     }
 

@@ -11,9 +11,7 @@ export const login = (
         // process.env.REACT_APP_API +'/login',
         `${process.env.REACT_APP_API}/login`,
         qs.stringify(user),
-        {
-            withCredentials: true  // carry cookie/set cookie
-        }
+        {withCredentials: true}  // carry cookie/set cookie
     );
 
     loginPromise
@@ -29,6 +27,7 @@ export const login = (
 };
 
 export const checkLogin = () => {
+    console.log("checklogin")
     const checkLoginPromise = axios.get(
         `${process.env.REACT_APP_API}/checklogin`,
         {withCredentials: true}

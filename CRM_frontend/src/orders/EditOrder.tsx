@@ -42,24 +42,24 @@ const EditOrder = (props: EditOrderProps) => {
     });
 
     useEffect(() => {
-        !props.isOrdersLoaded && dispatch(getOrders());
-    },[]);
+        !currentOrder && dispatch(getOrders());
+    },[currentOrder]);
 
     const formik = useFormik({
         enableReinitialize: true, // initialize and render
         initialValues: {...order, ...currentOrder},
         validationSchema: editOrderSchema,
         onSubmit: (values) => {
-            // alert(JSON.stringify(values, null, 2));
+            // ...
         },
     })
-
 
     return (
         <>
             <Card className={classes.form} elevation={3}>
                 <CardContent>
                     {
+
                         order ?
                             <form className={classes.form}  onSubmit={formik.handleSubmit}>
                                 <Typography variant="h4" gutterBottom>
@@ -82,7 +82,7 @@ const EditOrder = (props: EditOrderProps) => {
                                            error={formik.touched.user_id && Boolean(formik.errors.user_id)}
                                            helperText={formik.touched.user_id && formik.errors.user_id}/>
                                 <TextField required fullWidth id="purchase_date"  name="purchase_date" label="Purchase date" type="text" variant="outlined"
-                                           value={formik.values.purchase_date!.substring(0, 10)} onChange={formik.handleChange} onBlur={formik.handleBlur}
+                                           value={formik.values.purchase_date?.substring(0, 10)} onChange={formik.handleChange} onBlur={formik.handleBlur}
                                            error={formik.touched.purchase_date && Boolean(formik.errors.purchase_date)}
                                            helperText={formik.touched.purchase_date && formik.errors.purchase_date}/>
                                 <TextField required fullWidth id="approval_status"  name="approval_status" label="Approval status" type="text" variant="outlined"
@@ -114,7 +114,7 @@ const EditOrder = (props: EditOrderProps) => {
 export default EditOrder;
 
 interface EditOrderProps extends RouteComponentProps<{ id: string }>{
-    order: OrderModel | undefined | false;
-    isOrdersLoaded: boolean;
+    // order: OrderModel | undefined | false;
+    // isOrdersLoaded: boolean;
 }
 

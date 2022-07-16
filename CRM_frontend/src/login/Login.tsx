@@ -1,4 +1,4 @@
-import React, {SyntheticEvent, useState} from 'react';
+import React, {useState} from 'react';
 import {useDispatch} from "react-redux";
 import {login} from "../actions/auth.action";
 import {RouteComponentProps} from "react-router-dom";
@@ -10,7 +10,6 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import * as Yup from "yup";
 import {useFormik} from "formik";
-import {appConstants} from "../constants/constants";
 
 const loginSchema = Yup.object().shape({
     email: Yup.string().email('Enter a valid email').required('Email is required'),
@@ -38,25 +37,13 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Login = (props: LoginProps) => {
     const classes = useStyles();
-    const [user, setUser] = useState({
+    const [user] = useState({
         email: '',
         password: ''
     });
-    const [emailError, setEmailError] = useState(false)
-    const [passwordError, setPasswordError] = useState(false)
+
     const dispatch = useDispatch();
-    const submitHandler = (event: SyntheticEvent) => {
-        event.preventDefault();
-        setEmailError(false);
-        setPasswordError(false);
-        if (user.email === '') setEmailError(true)
-        if (user.password === '') setPasswordError(true)
-        dispatch(login(
-            user,
-            () => props.history.goBack(),
-            (msg: string) => console.log(msg)
-        ));
-    }
+
     const formik = useFormik({
         enableReinitialize: true, // initialize and render
         initialValues: {...user},
@@ -64,8 +51,8 @@ const Login = (props: LoginProps) => {
         onSubmit: (values) => {
             dispatch(login(
                 values,
-                // () => props.history.goBack(),
-                () => props.history.push(appConstants.userRoute),
+                () => props.history.goBack(),
+                // () => props.history.push(appConstants.userRoute),
                 (msg: string) => console.log(msg)
             ));
         },
