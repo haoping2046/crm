@@ -1,5 +1,5 @@
-import React, {useEffect, useState, useLayoutEffect } from "react";
-import {OrderModel, ReduxState} from "../models/order.model";
+import React, {useEffect, useState } from "react";
+import {ReduxState} from "../models/order.model";
 import {RouteComponentProps} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {getOrders} from "../actions/orders.action";
@@ -30,7 +30,7 @@ const EditOrder = (props: EditOrderProps) => {
         Array.isArray(state.orders) && state.orders.find(o => o.id === +props.match.params.id)
     );
 
-    const [order, setOrder] = useState({
+    const [order] = useState({
         title: '',
         customer_id: 0,
         product_id: 0,
@@ -43,7 +43,7 @@ const EditOrder = (props: EditOrderProps) => {
 
     useEffect(() => {
         !currentOrder && dispatch(getOrders());
-    },[currentOrder]);
+    },[currentOrder, dispatch]);
 
     const formik = useFormik({
         enableReinitialize: true, // initialize and render

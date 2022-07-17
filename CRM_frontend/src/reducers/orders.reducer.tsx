@@ -6,6 +6,9 @@ export const ordersReducer = (state: OrderModel [] | null = null, action: orders
     switch(action.type) {
         case appConstants.GET_ORDER:
             return (action.payload as AxiosResponse).data;
+        case appConstants.DELETE_ORDER:
+            const nextState = state ? [...state] : [];
+            return nextState.filter((o) => o.id !== action.payload as number);
         default:
             return state
     }
@@ -13,5 +16,6 @@ export const ordersReducer = (state: OrderModel [] | null = null, action: orders
 
 interface ordersReducerAction {
     type: string;
-    payload: AxiosResponse;  // | OrderModel
+    payload: AxiosResponse | number;// | OrderModel;
+
 }

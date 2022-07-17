@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {ReduxState} from "../models/order.model";
+import {OrderModel, ReduxState} from "../models/order.model";
 import {useDispatch, useSelector} from "react-redux";
 import {deleteOrder, getOrders} from "../actions/orders.action";
 import {Link, RouteComponentProps} from "react-router-dom";
@@ -44,11 +44,13 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Orders = (props: OrdersProps) => {
     const dispatch = useDispatch();
-    const ordersData = useSelector((state: ReduxState) => state.orders)
+    let ordersData: OrderModel[]  = [];
+    ordersData = useSelector((state: ReduxState) => state.orders)
 
     useEffect(() => {
         dispatch(getOrders());
-    }, [ordersData])
+    }, [dispatch])
+
 
     // delete modal
     const classes = useStyles();

@@ -17,13 +17,12 @@ export const deleteOrder = (
     succeed: () => void,
     fail: (msg: string) => void
 ) => {
-    const deleteOrderPromise = axios.delete(
+    axios.delete(
         `${process.env.REACT_APP_API}/orders/${id}`
     );
-
     return {
         type: appConstants.DELETE_ORDER,
-        payload: deleteOrderPromise
+        payload: id
     }
 }
 
