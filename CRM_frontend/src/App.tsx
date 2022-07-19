@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import Container from '@material-ui/core/Container'
 
 class App extends Component<any, any>{
+
     componentDidMount() {
         this.props.checkLogin();
     }

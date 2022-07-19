@@ -1,17 +1,17 @@
 import {useSelector} from "react-redux";
 import {useEffect} from "react";
 import {appConstants} from "../constants/constants";
-import {ReduxState} from "../models/order.model";
+import {ReduxState} from "../models/user.model";
 
 export const withGuard = (OldComponent: any) => {
     const HigherOrderComponent = (props: any) => {
 
-        const user = useSelector((state: ReduxState) => state.user);
-        // console.log("withGuard:" + user)
+        const user = useSelector((state: ReduxState) => state.userData);
+        const token = localStorage.getItem('token');
+
         useEffect(() => {
-            !user && props.history.push(appConstants.loginRoute)
-            // return() => {}  componentWillUnmount
-        }, [user, props.history]);
+            !token && !user && props.history.push(appConstants.loginRoute)
+        }, [token, user, props.history]);
 
         return user ?
             <OldComponent/> :

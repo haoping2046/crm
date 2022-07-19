@@ -16,7 +16,13 @@ export const login = (
 
     loginPromise
         .then(res => {
-            res.data.success ? succeed() : fail(res.data.message);
+            // res.data.success ? succeed() : fail(res.data.message);
+            if (res.data.success) {
+                localStorage.setItem('token', JSON.stringify(res.data)); // Save token in localStorage
+                succeed();
+            } else {
+                fail(res.data.message);
+            }
         })
         .catch(err => fail(err.message))
 
@@ -27,7 +33,6 @@ export const login = (
 };
 
 export const checkLogin = () => {
-    console.log("checklogin")
     const checkLoginPromise = axios.get(
         `${process.env.REACT_APP_API}/checklogin`,
         {withCredentials: true}
@@ -46,7 +51,13 @@ export const logout = (
         `${process.env.REACT_APP_API}/logout`,
         {withCredentials: true}
     ).then(res => {
-        res.data.success ? succeed() : fail(res.data.message);
+        // res.data.success ? succeed() : fail(res.data.message);
+        if (res.data.success) {
+            localStorage.removeItem('token');  // Remove token in localStorage
+            succeed();
+        } else {
+            fail(res.data.message)
+        }
     }).catch(err => fail(err.message));
 
     return {
@@ -54,3 +65,4 @@ export const logout = (
         payload: loginPromise
     }
 }
+

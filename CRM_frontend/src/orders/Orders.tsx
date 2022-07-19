@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {OrderModel, ReduxState} from "../models/order.model";
+import {ReduxState} from "../models/order.model";
 import {useDispatch, useSelector} from "react-redux";
 import {deleteOrder, getOrders} from "../actions/orders.action";
 import {Link, RouteComponentProps} from "react-router-dom";
@@ -44,8 +44,11 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Orders = (props: OrdersProps) => {
     const dispatch = useDispatch();
-    let ordersData: OrderModel[]  = [];
-    ordersData = useSelector((state: ReduxState) => state.orders)
+    // let ordersData: OrderModel[]  = [];
+    const ordersData = useSelector((state: ReduxState) => state.orders)
+    const userData = useSelector((state: ReduxState) => state.user)
+
+   // const {name, type} = userData;
 
     useEffect(() => {
         dispatch(getOrders());
@@ -94,14 +97,16 @@ const Orders = (props: OrdersProps) => {
             <table className="table table-striped table-bordered">
                 <thead>
                 <tr>
-                    <th>title</th>
-                    <th>customer id</th>
-                    <th>product name</th>
-                    <th>user id</th>
-                    <th>purchase date</th>
-                    <th>approval status</th>
-                    <th>discount</th>
-                    <th>operation</th>
+                    <th>Title</th>
+                    <th>Customer name</th>
+                    <th>Company</th>
+                    <th>Phone</th>
+                    <th>Product name</th>
+                    <th>Purchase date</th>
+                    <th>Discount</th>
+                    <th>Approval status</th>
+                    <th>Sales name</th>
+                    <th>Operation</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -110,7 +115,9 @@ const Orders = (props: OrdersProps) => {
                         return (
                             <tr key={order.id}>
                                 <td>{order.title}</td>
-                                <td>{order.customer_id}</td>
+                                <td>{order.customer.name}</td>
+                                <td>{order.customer.company}</td>
+                                <td>{order.customer.phone}</td>
                                 <td>{order.purchases?.map((p, index) => {
                                     return (
                                         <span key={p.product.id}>
@@ -118,10 +125,11 @@ const Orders = (props: OrdersProps) => {
                                         </span>
                                     )
                                 })}</td>
-                                <td>{order.user_id}</td>
+
                                 <td>{order.purchase_date.substring(0, 10)}</td>
-                                <td>{order.approval_status}</td>
                                 <td>{order.discount}</td>
+                                <td>{order.approval_status}</td>
+                                <td>{order.user.name}</td>
                                 <td>
                                     <IconButton aria-label="edit" component={Link} to={`${appConstants.editOrderRoute}/${order.id}`}>
                                         <EditIcon />

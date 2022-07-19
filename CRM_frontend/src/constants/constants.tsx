@@ -20,6 +20,8 @@ export const appConstants = {
     GET_CUSTOMER: 'GET_CUSTOMER',
     DELETE_ORDER: 'DELETE_ORDER',
 
+    AUTHENTICATE_THE_USER: "AUTHENTICATE_THE_USER",
+
     admin: 'admin',
     salesLeader: 'sales leader',
     seniorSale: 'senior sale',

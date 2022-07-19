@@ -10,7 +10,11 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -20,14 +24,29 @@ public class Order {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column
-	private int customer_id;
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
+	@JoinTable(
+			name = "order_customer",
+			joinColumns = {
+				@JoinColumn(name = "order_id", referencedColumnName = "id")
+			}, 
+			inverseJoinColumns = {
+				@JoinColumn(name = "customer_id", referencedColumnName = "id")
+			}
+		)
+	private Customer customer;
 	
-	@Column
-	private int product_id;
-	
-	@Column
-	private int user_id;
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
+	@JoinTable(
+			name = "order_user",
+			joinColumns = {
+				@JoinColumn(name = "order_id", referencedColumnName = "id")
+			}, 
+			inverseJoinColumns = {
+				@JoinColumn(name = "user_id", referencedColumnName = "id")
+			}
+		)
+	private User user;
 	
 	@Column
 	private Date purchase_date;
@@ -36,12 +55,12 @@ public class Order {
 	private String approval_status;
 	
 	@Column
-	private int discount;
+	private float discount;
 	
 	@Column
 	private String title;
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "order")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "order")
 	private List<OrderProduct> purchases;
 
 
@@ -50,18 +69,17 @@ public class Order {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Order(int id, int customer_id, int product_id, int user_id, Date purchase_date, String approval_status,
-			int discount, List<OrderProduct> purchases, String title) {
+	public Order(int id, Date purchase_date, String approval_status,
+			float discount, List<OrderProduct> purchases, String title, Customer customer, User user) {
 		super();
 		this.id = id;
-		this.customer_id = customer_id;
-		this.product_id = product_id;
-		this.user_id = user_id;
 		this.purchase_date = purchase_date;
 		this.approval_status = approval_status;
 		this.discount = discount;
 		this.purchases = purchases;
 		this.title = title;
+		this.customer = customer;
+		this.user = user;
 	}
 
 	public int getId() {
@@ -72,28 +90,20 @@ public class Order {
 		this.id = id;
 	}
 
-	public int getCustomer_id() {
-		return customer_id;
+	public User getUser() {
+		return user;
 	}
 
-	public void setCustomer_id(int customer_id) {
-		this.customer_id = customer_id;
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
+	public Customer getCustomer() {
+		return customer;
 	}
 
-	public int getProduct_id() {
-		return product_id;
-	}
-
-	public void setProduct_id(int product_id) {
-		this.product_id = product_id;
-	}
-
-	public int getUser_id() {
-		return user_id;
-	}
-
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
 	public Date getPurchase_date() {
@@ -112,11 +122,11 @@ public class Order {
 		this.approval_status = approval_status;
 	}
 
-	public int getDiscount() {
+	public float getDiscount() {
 		return discount;
 	}
 
-	public void setDiscount(int discount) {
+	public void setDiscount(float discount) {
 		this.discount = discount;
 	}
 	

@@ -6,7 +6,7 @@ import ExitToAppSharpIcon from '@material-ui/icons/ExitToAppSharp';
 
 const Header = () => {
     const user = useSelector((state: ReduxState) => state.user);
-
+    console.log(user)
     return (
         <nav className="navbar navbar-dark bg-dark navbar-expand-lg" style={{marginBottom: "30px"}}>
             <a href="#" className="navbar-brand">CRM</a>

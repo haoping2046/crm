@@ -32,6 +32,9 @@ public class User implements UserDetails {
 	@Column
 	private String password;
 	
+	@Column
+	private String name;
+	
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinTable(
 		name = "USER_PROFILE",
@@ -49,12 +52,21 @@ public class User implements UserDetails {
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(int id, String email, String password, List<Profile> profiles) {
+	public User(int id, String email, String password, List<Profile> profiles, String name) {
 		super();
 		this.id = id;
 		this.email = email;
 		this.password = password;
 		this.profiles = profiles;
+		this.name = name;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public int getId() {

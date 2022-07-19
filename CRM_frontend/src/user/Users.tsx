@@ -1,4 +1,4 @@
-import React, {SyntheticEvent, useEffect} from "react";
+import React, {useEffect} from "react";
 import {ReduxState} from "../models/user.model";
 import {Link, RouteComponentProps} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
@@ -24,11 +24,7 @@ const Users = (props: UserProps) => {
     const userData = useSelector((state: ReduxState) => state.userData)
     useEffect(() => {
         dispatch(getUsers());
-    }, [])
-    const addHandle = (event: SyntheticEvent) => {
-        event.preventDefault();
-        props.history.push(appConstants.addUserRoute);
-    }
+    }, [dispatch])
 
     return (
         <>
@@ -45,6 +41,7 @@ const Users = (props: UserProps) => {
                 <thead>
                 <tr>
                     <th>Email</th>
+                    <th>Name</th>
                     <th>Type</th>
                     <th>Enabled</th>
                 </tr>
@@ -55,6 +52,7 @@ const Users = (props: UserProps) => {
                         return (
                             <tr key={user.id}>
                                 <td>{user.email}</td>
+                                <td>{user.name}</td>
                                 <td>{user.profiles.map((p, index) => {
                                     return (
                                         <span key={p.id}>

@@ -54,6 +54,7 @@ const Customers = (props: CustomersProps) => {
 
             <div style={{ height: 440, width: '100%' }}>
                 <DataGrid
+
                     rows={rows}
                     columns={columns}
                     pageSize={pageSize}

@@ -20,11 +20,9 @@ import Home from "./home/Home";
 import Customers from "./customers/Customers";
 import {withGuard} from "./hocs/withGuard";
 
+
 const createStoreWithMiddleware = applyMiddleware(reduxPromise)(createStore);
 const store = createStoreWithMiddleware(rootReducer);
-// Check for token and update application state if required
-const token = localStorage.getItem('token');
-
 
 ReactDOM.render(
     <Provider store={store}>

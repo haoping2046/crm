@@ -1,9 +1,12 @@
 import {appConstants} from "../constants/constants";
 import axios from 'axios';
 
-export const getOrders = () => {
+export const getOrders = (
+    // user: {email: string, password: string, profiles: {id: string, type: string}[]},
+) => {
     const getProductsPromise = axios.get(
-        `${process.env.REACT_APP_API}/orders`
+        `${process.env.REACT_APP_API}/orders`,
+
     );
 
     return {

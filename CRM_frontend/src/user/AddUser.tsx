@@ -1,5 +1,5 @@
 import {RouteComponentProps} from "react-router-dom";
-import React, {SyntheticEvent, useState, useRef} from 'react';
+import React, {SyntheticEvent, useState} from 'react';
 import {addUser} from "../actions/user.action";
 import {appConstants} from "../constants/constants";
 import {useDispatch} from "react-redux";
@@ -25,6 +25,7 @@ const editUserSchema = Yup.object().shape({
 const AddUser = (props: AddUserProps) => {
     const classes = useFormStyles();
     const [user, setUser] = useState({
+        name: '',
         email: '',
         password: '',
         profiles: [{id: '', type: ''}],
@@ -58,26 +59,7 @@ const AddUser = (props: AddUserProps) => {
         initialValues: {...user},
         validationSchema: editUserSchema,
         onSubmit: (values) => {
-            // console.log(values.email);
-            // let newState = {...user, 'email': values.email, 'password': values.password}
-            // let newP = [...values.profiles].filter(p => p.id !== ''); // remove empty obj
-            //
-            // if(values.profiles.find((p) => {return JSON.stringify(p) == appConstants.admin})) {
-            //     setUser({...newState, profiles: [...newP, {id: '1', type: appConstants.admin}] })
-            // }
-            // if(values.profiles.find((p) => {return JSON.stringify(p) == appConstants.salesLeader})) {
-            //     setUser({...newState, profiles: [...newP, {id: '2', type: appConstants.salesLeader}] })
-            // }
-            // if(values.profiles.find((p) => {return JSON.stringify(p) == appConstants.seniorSale})) {
-            //     setUser({...user, profiles: [...newP, {id: '3', type: appConstants.seniorSale}] })
-            // }
-            //
-            // alert(JSON.stringify(user, null, 2));
-            // dispatch(addUser(
-            //     user,
-            //     () => props.history.push(appConstants.userRoute),
-            //     (msg: string) => console.log(msg)
-            // ))
+
         },
     })
     return(
@@ -87,7 +69,8 @@ const AddUser = (props: AddUserProps) => {
                     <Typography className={classes.title} variant="h4" gutterBottom>
                         Add User
                     </Typography>
-
+                    <TextField required fullWidth id="name" label="Name" type="text" variant="outlined"
+                               value={user.name} onChange={updateHandler} onBlur={formik.handleBlur}/>
                     <TextField required fullWidth id="email" label="Email" type="email" variant="outlined"
                                value={user.email} onChange={updateHandler} onBlur={formik.handleBlur}/>
                     <TextField required fullWidth id="password" label="Password" type="password" variant="outlined"
