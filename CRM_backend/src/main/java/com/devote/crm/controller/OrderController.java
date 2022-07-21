@@ -28,12 +28,18 @@ public class OrderController {
 //	@PreAuthorize("hasAuthority('admin')")
 	@GetMapping
 	public List<Order> getAll() {
-		return orderService.getAll();
+		List<Order> res = orderService.getAll();
+		return res;
 	}
 	
 	@GetMapping("/{id}")
 	public Order getById(@PathVariable int id) {
 		return orderService.getOrderById(id);
+	}
+	
+	@GetMapping("/userId={userId}")
+	public List<Order> getByUserId(@PathVariable int userId) {
+		return userId == 0 ? orderService.getAll() : orderService.getOrderByUserId(userId);
 	}
 	
 	@PostMapping

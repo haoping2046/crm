@@ -18,7 +18,7 @@ public class AccessDeniedHandlerImpl implements AccessDeniedHandler {
 	@Override
 	public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException exception)
 			throws IOException, ServletException {
-		SecurityUtils.sendResponse(response, HttpServletResponse.SC_OK, "Not authorized resources", exception);
+		SecurityUtils.sendResponse(response, HttpServletResponse.SC_OK, "Not authorized resources", exception, null);
 	}
 
 }

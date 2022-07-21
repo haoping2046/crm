@@ -1,12 +1,11 @@
 import {NavLink} from "react-router-dom";
-import {appConstants} from "../constants/constants";
+import {ReduxState, appConstants} from "../constants/constants";
 import {useSelector} from "react-redux";
-import {ReduxState} from "../models/order.model";
 import ExitToAppSharpIcon from '@material-ui/icons/ExitToAppSharp';
 
 const Header = () => {
-    const user = useSelector((state: ReduxState) => state.user);
-    console.log(user)
+    const user = useSelector((state: ReduxState) => state.auth);
+
     return (
         <nav className="navbar navbar-dark bg-dark navbar-expand-lg" style={{marginBottom: "30px"}}>
             <a href="#" className="navbar-brand">CRM</a>

@@ -1,5 +1,4 @@
 import React, {useEffect, useState } from "react";
-import {ReduxState} from "../models/order.model";
 import {RouteComponentProps} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {getOrders} from "../actions/orders.action";
@@ -8,7 +7,7 @@ import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import { useFormik } from 'formik';
 import Button from "@material-ui/core/Button";
-import {appConstants} from "../constants/constants";
+import {ReduxState, appConstants} from "../constants/constants";
 import {useFormStyles} from "../util/formStyle";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";

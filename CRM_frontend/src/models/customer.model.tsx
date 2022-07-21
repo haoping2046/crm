@@ -1,3 +1,7 @@
+export interface OrderCustomerModel {
+    customer: CustomerModel
+}
+
 export interface CustomerModel {
     id: number;
     name: string;
@@ -5,6 +9,3 @@ export interface CustomerModel {
     phone: string;
 }
 
-export interface ReduxState {
-    customers: CustomerModel [];
-}

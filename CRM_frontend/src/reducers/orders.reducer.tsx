@@ -5,6 +5,7 @@ import {AxiosResponse} from "axios";
 export const ordersReducer = (state: OrderModel [] | null = null, action: ordersReducerAction) => {
     switch(action.type) {
         case appConstants.GET_ORDER:
+            console.log()
             return (action.payload as AxiosResponse).data;
         case appConstants.DELETE_ORDER:
             const nextState = state ? [...state] : [];

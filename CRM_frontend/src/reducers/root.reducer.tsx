@@ -6,7 +6,7 @@ import {customersReducer} from "./customers.reducer";
 
 export const rootReducer = combineReducers({
     orders: ordersReducer,
-    user: authReducer,
-    userData: usersReducer,
+    auth: authReducer,
+    user: usersReducer,
     customers: customersReducer,
 })

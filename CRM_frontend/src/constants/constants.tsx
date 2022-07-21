@@ -1,3 +1,7 @@
+import {OrderModel} from "../models/order.model";
+import {CustomerModel} from "../models/customer.model";
+import {UserModel} from "../models/user.model";
+
 export const appConstants = {
     orderRoute: "/orders",
     editOrderRoute: "/editOrderRoute",
@@ -25,5 +29,12 @@ export const appConstants = {
     admin: 'admin',
     salesLeader: 'sales leader',
     seniorSale: 'senior sale',
+}
+
+export interface ReduxState {
+    orders: OrderModel [];
+    customers: CustomerModel [];
+    user: UserModel [];
+    auth: UserModel;
 }
 

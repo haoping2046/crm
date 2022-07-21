@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from "react";
-import {ReduxState} from "../models/order.model";
 import {useDispatch, useSelector} from "react-redux";
-import {deleteOrder, getOrders} from "../actions/orders.action";
+import {deleteOrder, getOrders, getPersonalOrders} from "../actions/orders.action";
 import {Link, RouteComponentProps} from "react-router-dom";
-import {appConstants} from "../constants/constants";
+import {ReduxState, appConstants} from "../constants/constants";
 import Typography from '@material-ui/core/Typography';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
@@ -44,14 +43,19 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Orders = (props: OrdersProps) => {
     const dispatch = useDispatch();
-    // let ordersData: OrderModel[]  = [];
-    const ordersData = useSelector((state: ReduxState) => state.orders)
-    const userData = useSelector((state: ReduxState) => state.user)
-
-   // const {name, type} = userData;
-
+    const orders = useSelector((state: ReduxState) => state.orders);
+    const auth = useSelector((state: ReduxState) => state.auth);
+    console.log(auth, auth.profiles)
+    const types = auth.profiles?.map((p) => p.type);
+    const id = auth.id;
+    console.log(auth, types)
+    console.log(types.includes("sales leader")  || types.includes("admin"));
     useEffect(() => {
-        dispatch(getOrders());
+        if (types.includes("sales leader") || types.includes("admin")) {
+            dispatch(getOrders());
+        } else {
+            dispatch(getPersonalOrders(id));
+        }
     }, [dispatch])
 
 
@@ -111,13 +115,13 @@ const Orders = (props: OrdersProps) => {
                 </thead>
                 <tbody>
                 {
-                    ordersData?.map((order) => {
+                    orders?.map((order) => {
                         return (
                             <tr key={order.id}>
                                 <td>{order.title}</td>
-                                <td>{order.customer.name}</td>
-                                <td>{order.customer.company}</td>
-                                <td>{order.customer.phone}</td>
+                                <td>{order.orderCustomer.customer.name}</td>
+                                <td>{order.orderCustomer.customer.company}</td>
+                                <td>{order.orderCustomer.customer.phone}</td>
                                 <td>{order.purchases?.map((p, index) => {
                                     return (
                                         <span key={p.product.id}>
@@ -129,7 +133,7 @@ const Orders = (props: OrdersProps) => {
                                 <td>{order.purchase_date.substring(0, 10)}</td>
                                 <td>{order.discount}</td>
                                 <td>{order.approval_status}</td>
-                                <td>{order.user.name}</td>
+                                <td>{order.orderUser.user.name}</td>
                                 <td>
                                     <IconButton aria-label="edit" component={Link} to={`${appConstants.editOrderRoute}/${order.id}`}>
                                         <EditIcon />

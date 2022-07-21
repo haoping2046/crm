@@ -1,9 +1,8 @@
 import React, {useEffect} from "react";
-import {ReduxState} from "../models/user.model";
 import {Link, RouteComponentProps} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {getUsers} from "../actions/user.action";
-import {appConstants} from "../constants/constants";
+import {ReduxState, appConstants} from "../constants/constants";
 import Typography from "@material-ui/core/Typography";
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
@@ -21,7 +20,7 @@ const useStyles = makeStyles({
 const Users = (props: UserProps) => {
     const classes = useStyles();
     const dispatch = useDispatch();
-    const userData = useSelector((state: ReduxState) => state.userData)
+    const user = useSelector((state: ReduxState) => state.user)
     useEffect(() => {
         dispatch(getUsers());
     }, [dispatch])
@@ -48,7 +47,7 @@ const Users = (props: UserProps) => {
                 </thead>
                 <tbody>
                 {
-                    userData?.map((user) => {
+                    user?.map((user) => {
                         return (
                             <tr key={user.id}>
                                 <td>{user.email}</td>

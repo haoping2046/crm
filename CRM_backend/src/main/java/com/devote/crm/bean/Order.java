@@ -24,29 +24,36 @@ public class Order {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
-	@JoinTable(
-			name = "order_customer",
-			joinColumns = {
-				@JoinColumn(name = "order_id", referencedColumnName = "id")
-			}, 
-			inverseJoinColumns = {
-				@JoinColumn(name = "customer_id", referencedColumnName = "id")
-			}
-		)
-	private Customer customer;
+//	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
+//	@JoinTable(
+//			name = "order_customer",
+//			joinColumns = {
+//				@JoinColumn(name = "order_id", referencedColumnName = "id")
+//			}, 
+//			inverseJoinColumns = {
+//				@JoinColumn(name = "customer_id", referencedColumnName = "id")
+//			}
+//		)
+//	private Customer customer;
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
-	@JoinTable(
-			name = "order_user",
-			joinColumns = {
-				@JoinColumn(name = "order_id", referencedColumnName = "id")
-			}, 
-			inverseJoinColumns = {
-				@JoinColumn(name = "user_id", referencedColumnName = "id")
-			}
-		)
-	private User user;
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "id", referencedColumnName = "order_id")
+	private OrderCustomer orderCustomer;
+	
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "id", referencedColumnName = "order_id")
+	private OrderUser orderUser;
+//	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
+//	@JoinTable(
+//			name = "order_user",
+//			joinColumns = {
+//				@JoinColumn(name = "order_id", referencedColumnName = "id")
+//			}, 
+//			inverseJoinColumns = {
+//				@JoinColumn(name = "user_id", referencedColumnName = "id")
+//			}
+//		)
+//	private User user;
 	
 	@Column
 	private Date purchase_date;
@@ -70,7 +77,7 @@ public class Order {
 	}
 
 	public Order(int id, Date purchase_date, String approval_status,
-			float discount, List<OrderProduct> purchases, String title, Customer customer, User user) {
+			float discount, List<OrderProduct> purchases, String title, OrderCustomer orderCustomer, OrderUser orderUser) {
 		super();
 		this.id = id;
 		this.purchase_date = purchase_date;
@@ -78,8 +85,8 @@ public class Order {
 		this.discount = discount;
 		this.purchases = purchases;
 		this.title = title;
-		this.customer = customer;
-		this.user = user;
+		this.orderCustomer = orderCustomer;
+		this.orderUser = orderUser;
 	}
 
 	public int getId() {
@@ -90,20 +97,20 @@ public class Order {
 		this.id = id;
 	}
 
-	public User getUser() {
-		return user;
+	public OrderUser getOrderUser() {
+		return orderUser;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setOrderUser(OrderUser orderUser) {
+		this.orderUser = orderUser;
 	}
 	
-	public Customer getCustomer() {
-		return customer;
+	public OrderCustomer getOrderCustomer() {
+		return orderCustomer;
 	}
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public void setrderCustomer(OrderCustomer orderCustomer) {
+		this.orderCustomer = orderCustomer;
 	}
 
 	public Date getPurchase_date() {

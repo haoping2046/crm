@@ -1,6 +1,8 @@
 package com.devote.crm.security.handler;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +12,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
 
+import com.devote.crm.bean.Profile;
 import com.devote.crm.security.SecurityUtils;
 
 
@@ -19,7 +22,7 @@ public class AuthenticationFailureHandlerImpl extends SimpleUrlAuthenticationFai
 	@Override
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException exception) throws IOException, ServletException {
-		SecurityUtils.sendResponse(response, HttpServletResponse.SC_OK, "Login failed", exception);
+		SecurityUtils.sendResponse(response, HttpServletResponse.SC_OK, "Login failed", exception, null);
 	}
 
 }

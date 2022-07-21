@@ -1,10 +1,16 @@
 package com.devote.crm.http;
 
+import java.util.List;
+
+import com.devote.crm.bean.User;
+import com.devote.crm.bean.Profile;
+
 public class Response {
 
     private boolean success;
     private int code;
     private String message;
+    private User user;
 
     public Response() {
         super();
@@ -30,8 +36,26 @@ public class Response {
         this.code = code;
         this.message = message;
     }
+    
+    public Response(boolean success, int code, String message, User user) {
+        super();
+        this.success = success;
+        this.code = code;
+        this.message = message;
+        this.user = user;
+    }
 
-    public boolean isSuccess() {
+
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public boolean isSuccess() {
         return success;
     }
 

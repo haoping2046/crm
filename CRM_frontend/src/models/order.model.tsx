@@ -1,11 +1,11 @@
-import {UserModel} from "./user.model";
-import {CustomerModel} from "./customer.model";
+import {OrderUserModel} from "./user.model";
+import {OrderCustomerModel} from "./customer.model";
 
 export interface OrderModel {
     id: number;
     title: string;
-    customer: CustomerModel;
-    user: UserModel;
+    orderCustomer: OrderCustomerModel;
+    orderUser: OrderUserModel;
     purchase_date: string;
     approval_status: string;
     discount: number;
@@ -24,8 +24,3 @@ export interface ProductModel {
     price: number
 }
 
-export interface ReduxState {
-    orders: OrderModel [];
-    // userData: UserModel;
-    user: {email: string};
-}

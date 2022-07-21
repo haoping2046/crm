@@ -30,7 +30,7 @@ ReactDOM.render(
             <App>
                 <Switch>
                     {/*{withGuard(Orders)}*/}
-                    <Route path={appConstants.orderRoute} component={Orders}/>
+                    <Route path={appConstants.orderRoute} component={withGuard(Orders)}/>
                     <Route path={`${appConstants.editOrderRoute}/:id`} component={EditOrder}/>
                     <Route path={appConstants.loginRoute} component={Login}/>
                     <Route path={appConstants.logoutRoute} component={Logout}/>

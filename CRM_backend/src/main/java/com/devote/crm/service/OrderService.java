@@ -34,6 +34,12 @@ public class OrderService {
         return orderDao.findById(id).get();
     }
     
+    public List<Order> getOrderByUserId(Integer userId) {
+    	List<Order> res = orderDao.findPersonalOrderByUserId(userId);
+    	System.out.println(res);
+    	return res;
+    }
+    
     public Response save(Order order) {
         // Spring transaction will automatically roll back if exception out.
         try {

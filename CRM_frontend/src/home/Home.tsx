@@ -5,9 +5,9 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import {useDispatch, useSelector} from "react-redux";
-import {ReduxState} from "../models/order.model";
 import {useEffect} from "react";
 import {getOrders} from "../actions/orders.action";
+import {ReduxState} from "../constants/constants";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({

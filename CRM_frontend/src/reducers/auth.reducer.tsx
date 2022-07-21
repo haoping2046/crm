@@ -1,18 +1,16 @@
 import {appConstants} from "../constants/constants";
+import {AxiosResponse} from "axios";
+import {UserModel} from "../models/user.model";
 
 
-export const authReducer = (state: {username: string} | null = null, action: authReducerAction) => {
+export const authReducer = (state: UserModel | null = null, action: authReducerAction) => {
     switch (action.type) {
         case appConstants.LOGIN:
-            // return action.payload.data.success ? action.payload.data.user : null;
-            return action.payload.data.success ? {email: 'admin@devote.com'}: null;
+            // console.log((action.payload as AxiosResponse).data.user)
+            return (action.payload as AxiosResponse).data.user
         case appConstants.CHECK_LOGIN:
-            console.log(action.payload.data.user)
             return action.payload.data.success ? action.payload.data.user: null;
-
-                // return action.payload.data.success ? {email: 'admin@devote.com'}: null;
         case appConstants.LOGOUT:
-            // return action.payload.data.success ? action.payload.data.user : null;
             return null;
         default:
             return state;

@@ -1,3 +1,7 @@
+export interface OrderUserModel {
+    user: UserModel;
+}
+
 export interface UserModel {
     id: number;
     email: string;
@@ -10,9 +14,4 @@ export interface UserModel {
 export interface ProfileModel {
     id: number;
     type: string;
-}
-
-export interface ReduxState {
-    userData: UserModel [];
-    user: {username: string};
 }

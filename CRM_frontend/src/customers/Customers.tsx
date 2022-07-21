@@ -2,11 +2,11 @@ import {DataGrid, GridColDef,} from '@material-ui/data-grid';
 import {useListStyles} from "../util/listStyle";
 import {RouteComponentProps} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {ReduxState} from "../models/customer.model";
 import React, {useEffect, useState} from "react";
 import {getCustomers} from "../actions/customers.action";
 import Typography from "@material-ui/core/Typography";
 import QuickSearchToolbar from "./QuickSearchToolbar";
+import {ReduxState} from "../constants/constants";
 
 const columns: GridColDef[] = [
     {field: 'name', headerName: 'Name', width: 200,},
