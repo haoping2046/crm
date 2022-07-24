@@ -10,6 +10,7 @@ import IconButton from '@material-ui/core/IconButton'
 import Modal from '@material-ui/core/Modal';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import AddIcon from "@material-ui/icons/Add";
 
 // delete
 function getModalStyle() {
@@ -25,6 +26,12 @@ function getModalStyle() {
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
+        button: {
+            marginBottom: 10,
+        },
+        title: {
+            marginBottom: 20,
+        },
         paper: {
             position: 'absolute',
             width: 450,
@@ -45,11 +52,10 @@ const Orders = (props: OrdersProps) => {
     const dispatch = useDispatch();
     const orders = useSelector((state: ReduxState) => state.orders);
     const auth = useSelector((state: ReduxState) => state.auth);
-    console.log(auth, auth.profiles)
+
     const types = auth.profiles?.map((p) => p.type);
     const id = auth.id;
-    console.log(auth, types)
-    console.log(types.includes("sales leader")  || types.includes("admin"));
+
     useEffect(() => {
         if (types.includes("sales leader") || types.includes("admin")) {
             dispatch(getOrders());
@@ -94,9 +100,14 @@ const Orders = (props: OrdersProps) => {
 
     return (
         <>
-            <Typography variant="h4" gutterBottom>
+            <Typography className={classes.title}  variant="h4" gutterBottom>
                 Order
             </Typography>
+            <Link to={`${appConstants.addOrderRoute}`}>
+                <Button variant="contained" color="primary" className={classes.button} startIcon={<AddIcon />}>
+                    ADD ORDER
+                </Button>
+            </Link>
 
             <table className="table table-striped table-bordered">
                 <thead>

@@ -11,6 +11,7 @@ export const appConstants = {
     addUserRoute: "/add-user",
     homeRoute: "/home",
     customerRoute: "/customers",
+    addOrderRoute: "/add-order",
 
     // TODO: delete
     testRoute: "/test",

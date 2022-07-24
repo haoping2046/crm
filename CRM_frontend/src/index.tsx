@@ -19,6 +19,7 @@ import Logout from "./login/Logout";
 import Home from "./home/Home";
 import Customers from "./customers/Customers";
 import {withGuard} from "./hocs/withGuard";
+import AddOrder from "./orders/AddOrder";
 
 
 const createStoreWithMiddleware = applyMiddleware(reduxPromise)(createStore);
@@ -36,6 +37,7 @@ ReactDOM.render(
                     <Route path={appConstants.logoutRoute} component={Logout}/>
                     <Route path={appConstants.userRoute} component={withGuard(Users)}/>
                     <Route path={appConstants.addUserRoute} component={AddUser}/>
+                    <Route path={appConstants.addOrderRoute} component={AddOrder}/>
                     <Route path={appConstants.homeRoute} component={Home}/>
                     <Route path={appConstants.customerRoute} component={withGuard(Customers)}/>
                     <Redirect path="*" to={appConstants.orderRoute}/>

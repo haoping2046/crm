@@ -80,11 +80,11 @@ const EditOrder = (props: EditOrderProps) => {
                                            value={formik.values.user_id} onChange={formik.handleChange} onBlur={formik.handleBlur}
                                            error={formik.touched.user_id && Boolean(formik.errors.user_id)}
                                            helperText={formik.touched.user_id && formik.errors.user_id}/>
-                                <TextField required fullWidth id="purchase_date"  name="purchase_date" label="Purchase date" type="text" variant="outlined"
+                                <TextField required fullWidth id="purchase_date" name="purchase_date" label="Purchase date" type="text" variant="outlined"
                                            value={formik.values.purchase_date?.substring(0, 10)} onChange={formik.handleChange} onBlur={formik.handleBlur}
                                            error={formik.touched.purchase_date && Boolean(formik.errors.purchase_date)}
                                            helperText={formik.touched.purchase_date && formik.errors.purchase_date}/>
-                                <TextField required fullWidth id="approval_status"  name="approval_status" label="Approval status" type="text" variant="outlined"
+                                <TextField required fullWidth id="approval_status" name="approval_status" label="Approval status" type="text" variant="outlined"
                                            value={formik.values.approval_status} onChange={formik.handleChange} onBlur={formik.handleBlur}
                                            error={formik.touched.approval_status && Boolean(formik.errors.approval_status)}
                                            helperText={formik.touched.approval_status && formik.errors.approval_status}/>

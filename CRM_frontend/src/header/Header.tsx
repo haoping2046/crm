@@ -44,10 +44,16 @@ const Header = () => {
                             <NavLink className="nav-link" to={appConstants.loginRoute}>
                                 Login
                             </NavLink>:
-                            <NavLink className="nav-link" to={appConstants.logoutRoute}>
-                                Logout
-                                <ExitToAppSharpIcon/>
-                            </NavLink>
+                            <div>
+
+                                <NavLink className="nav-link" to={appConstants.logoutRoute}>
+                                    <span>{user.name}</span>
+                                    <span>
+                                        <ExitToAppSharpIcon/>
+                                    </span>
+                                </NavLink>
+                            </div>
+
                     }
 
                 </li>
