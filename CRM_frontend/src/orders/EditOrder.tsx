@@ -58,7 +58,6 @@ const EditOrder = (props: EditOrderProps) => {
             <Card className={classes.form} elevation={3}>
                 <CardContent>
                     {
-
                         order ?
                             <form className={classes.form}  onSubmit={formik.handleSubmit}>
                                 <Typography variant="h4" gutterBottom>

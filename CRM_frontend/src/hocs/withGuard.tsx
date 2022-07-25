@@ -7,7 +7,7 @@ export const withGuard = (OldComponent: any) => {
 
         const auth = useSelector((state: ReduxState) => state.auth);
         const token = localStorage.getItem('token');
-        // console.log(token, auth);
+        console.log(!token, !auth);
         useEffect(() => {
             !token && !auth && props.history.push(appConstants.loginRoute)
         }, [token, auth, props.history]);

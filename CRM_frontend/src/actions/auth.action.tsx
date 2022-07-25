@@ -32,15 +32,27 @@ export const login = (
     }
 };
 
-export const checkLogin = () => {
+export const checkLogin = (
+    succeed: () => void,
+    fail: (msg: string) => void
+) => {
+
     const checkLoginPromise = axios.get(
         `${process.env.REACT_APP_API}/checklogin`,
         {withCredentials: true}
     );
+
+    checkLoginPromise
+        .then(res => {
+            res.data.success ? succeed() : fail(res.data.message);
+        })
+        .catch(err => fail(err.message))
+
     return {
         type: appConstants.CHECK_LOGIN,
         payload: checkLoginPromise
     }
+
 }
 
 export const logout = (

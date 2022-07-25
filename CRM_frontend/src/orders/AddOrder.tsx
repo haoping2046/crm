@@ -15,6 +15,7 @@ import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import {FormControl} from "@material-ui/core";
+import {addOrder} from "../actions/orders.action";
 
 const editUserSchema = Yup.object().shape({
     email: Yup.string().email('Enter a valid email').required('Email is required'),
@@ -28,10 +29,11 @@ const AddOrder = (props: AddOrderProps) => {
         orderCustomer: {customer: {name: '', company: '', phone: ''}},
         purchases: [{product: {name: ''}}],
         purchase_date: '',
-        approvalStatus: 'Pending',
+        approval_status: 'Pending',
         discount: 0,
         orderUser: {user: {name: ''}},
     })
+
     const user = useSelector((state: ReduxState) => state.auth);
     const dispatch = useDispatch();
 
@@ -49,15 +51,16 @@ const AddOrder = (props: AddOrderProps) => {
 
     const updateHandler = (event: SyntheticEvent) => {
         const ele = event.target as HTMLInputElement;
+        console.log(ele.id, ele.value)
         setOrder({...order, [ele.id]: ele.value})
     }
     const submitHandler = (event: SyntheticEvent) => {
         event.preventDefault();
-        // dispatch(addUser(
-        //     order,
-        //     () => props.history.push(appConstants.userRoute),
-        //     (msg: string) => console.log(msg)
-        // ))
+        dispatch(addOrder(
+            order,
+            () => props.history.push(appConstants.orderRoute),
+            (msg: string) => console.log(msg)
+        ))
     }
     const formik = useFormik({
         initialValues: {...order},
@@ -73,11 +76,12 @@ const AddOrder = (props: AddOrderProps) => {
                     <Typography className={classes.title} variant="h4" gutterBottom>
                         Add User
                     </Typography>
-                    <TextField required fullWidth id="name" label="Title" type="text" variant="outlined"
+
+                    <TextField required fullWidth id="title" label="Title" type="text" variant="outlined"
                                value={order.title} onChange={updateHandler} onBlur={formik.handleBlur}/>
-                    <TextField required fullWidth id="customerName" label="Customer Name" type="text" variant="outlined"
+                    <TextField required fullWidth id={order.orderCustomer.customer.name} label="Customer Name" type="text" variant="outlined"
                                value={order.orderCustomer.customer.name} onChange={updateHandler} onBlur={formik.handleBlur}/>
-                    <TextField required fullWidth id="company" label="Company" type="text" variant="outlined"
+                    <TextField required fullWidth id={order.orderCustomer.customer.company} label="Company" type="text" variant="outlined"
                                value={order.orderCustomer.customer.company} onChange={updateHandler} onBlur={formik.handleBlur}/>
                     <TextField required fullWidth id="phone" label="Phone" type="text" variant="outlined"
                                value={order.orderCustomer.customer.phone} onChange={updateHandler} onBlur={formik.handleBlur}/>

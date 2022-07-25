@@ -35,9 +35,7 @@ public class OrderService {
     }
     
     public List<Order> getOrderByUserId(Integer userId) {
-    	List<Order> res = orderDao.findPersonalOrderByUserId(userId);
-    	System.out.println(res);
-    	return res;
+    	return orderDao.findPersonalOrderByUserId(userId);
     }
     
     public Response save(Order order) {
