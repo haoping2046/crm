@@ -16,4 +16,6 @@ public interface OrderDao extends JpaRepository<Order, Integer> {
 			+ "and o.id = ou.order_id and ou.user_id = u.id "
 			+ "and u.id = :userId", nativeQuery = true)
 	public List<Order> findPersonalOrderByUserId(@Param("userId") int userId);
+	
+	public Order findTopByOrderByIdDesc();
 }

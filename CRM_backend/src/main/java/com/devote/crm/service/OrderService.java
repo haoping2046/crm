@@ -50,7 +50,16 @@ public class OrderService {
             });
 
             //orderHistoryDao.save(order);
+            // set order id in order before create new order
+            int currentId = orderDao.findTopByOrderByIdDesc().getId();
+            order.setId(currentId + 1);
+            
+            // set order in OrderCustomer bean and OrderUser bean
+            order.getOrderCustomer().setOrder(order);
+            order.getOrderUser().setOrder(order);
             orderDao.save(order);
+            
+            
 
             return new Response(true);
         } catch (Exception e) {

@@ -24,18 +24,6 @@ public class Order {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-//	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
-//	@JoinTable(
-//			name = "order_customer",
-//			joinColumns = {
-//				@JoinColumn(name = "order_id", referencedColumnName = "id")
-//			}, 
-//			inverseJoinColumns = {
-//				@JoinColumn(name = "customer_id", referencedColumnName = "id")
-//			}
-//		)
-//	private Customer customer;
-	
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "id", referencedColumnName = "order_id")
 	private OrderCustomer orderCustomer;
@@ -43,18 +31,7 @@ public class Order {
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "id", referencedColumnName = "order_id")
 	private OrderUser orderUser;
-//	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
-//	@JoinTable(
-//			name = "order_user",
-//			joinColumns = {
-//				@JoinColumn(name = "order_id", referencedColumnName = "id")
-//			}, 
-//			inverseJoinColumns = {
-//				@JoinColumn(name = "user_id", referencedColumnName = "id")
-//			}
-//		)
-//	private User user;
-	
+
 	@Column
 	private Date purchase_date;
 	
@@ -109,7 +86,7 @@ public class Order {
 		return orderCustomer;
 	}
 
-	public void setrderCustomer(OrderCustomer orderCustomer) {
+	public void setOrderCustomer(OrderCustomer orderCustomer) {
 		this.orderCustomer = orderCustomer;
 	}
 

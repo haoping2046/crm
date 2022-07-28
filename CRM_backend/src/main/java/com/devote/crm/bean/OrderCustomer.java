@@ -24,7 +24,7 @@ public class OrderCustomer {
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
 	private Order order;
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "customer_id", referencedColumnName = "id")
 	private Customer customer;
 

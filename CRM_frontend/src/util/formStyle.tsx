@@ -10,6 +10,9 @@ export const useFormStyles = makeStyles((theme: Theme) =>
         title: {
             marginBottom: 20,
         },
+        checkbox: {
+            marginBottom: 20,
+        },
         form: {
             width: 600,
             margin: 'auto',

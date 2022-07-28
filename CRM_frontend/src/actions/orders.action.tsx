@@ -47,11 +47,11 @@ export const addOrder = (
     order: {
         title: string,
         orderCustomer: {customer: {name: string, company: string, phone: string}},
-        purchases: {product: {name: string}}[],
+        purchases: {product: {id: string}}[],
         purchase_date: string,
         approval_status: string,
         discount: number,
-        orderUser: {user: {name: string}}
+        orderUser: {user: {id: number}}
     },
     succeed: () => void,
     fail: (msg: string) => void

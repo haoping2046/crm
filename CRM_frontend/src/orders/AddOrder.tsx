@@ -16,6 +16,9 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import {FormControl} from "@material-ui/core";
 import {addOrder} from "../actions/orders.action";
+import {MuiPickersUtilsProvider, KeyboardDatePicker} from '@material-ui/pickers';
+import DateFnsUtils from '@date-io/date-fns';
+
 
 const editUserSchema = Yup.object().shape({
     email: Yup.string().email('Enter a valid email').required('Email is required'),
@@ -24,38 +27,52 @@ const editUserSchema = Yup.object().shape({
 
 const AddOrder = (props: AddOrderProps) => {
     const classes = useFormStyles();
+    const user = useSelector((state: ReduxState) => state.auth);
+    const currentDate = new Date().toISOString().split('T')[0];
+
     const [order, setOrder] = useState({
         title: '',
         orderCustomer: {customer: {name: '', company: '', phone: ''}},
-        purchases: [{product: {name: ''}}],
-        purchase_date: '',
+        purchases: [{product: {id: ''}}],
+        purchase_date: currentDate,
         approval_status: 'Pending',
         discount: 0,
-        orderUser: {user: {name: ''}},
+        orderUser: {user: {id: user.id}},
     })
 
-    const user = useSelector((state: ReduxState) => state.auth);
+
     const dispatch = useDispatch();
 
     const checkHandler = (event: SyntheticEvent) => {
         const ele = event.target as HTMLInputElement;
-        let newPurchases = [...order.purchases].filter(p => p.product.name!== ''); // remove empty obj
+        let newPurchases = [...order.purchases].filter(p => p.product.id!== ''); // remove empty obj
 
         if(ele.checked) {
-            setOrder({...order, purchases: [...newPurchases, {product: {name: ele.name}}] })
+            setOrder({...order, purchases: [...newPurchases, {product: {id: ele.value}}] })
         } else {
-            newPurchases.splice(order.purchases.indexOf({product: {name: ele.name}}, 1));
+            newPurchases.splice(order.purchases.indexOf({product: {id: ele.value}}, 1));
             setOrder({...order, purchases: newPurchases});
         }
     }
 
     const updateHandler = (event: SyntheticEvent) => {
         const ele = event.target as HTMLInputElement;
-        console.log(ele.id, ele.value)
         setOrder({...order, [ele.id]: ele.value})
     }
+
+    const updateCustomerField = (event: SyntheticEvent) => {
+        const ele = event.target as HTMLInputElement;
+        setOrder({...order, orderCustomer: { ...order.orderCustomer, customer: {...order.orderCustomer.customer, [ele.name]: ele.value}}})
+    }
+
+    const handleDateChange = (date: Date | null) => {
+        console.log(date!.toISOString().split('T')[0])
+        setOrder({...order, purchase_date: date ? date.toISOString().split('T')[0] : currentDate});
+    };
+
     const submitHandler = (event: SyntheticEvent) => {
         event.preventDefault();
+        console.log(order);
         dispatch(addOrder(
             order,
             () => props.history.push(appConstants.orderRoute),
@@ -74,19 +91,19 @@ const AddOrder = (props: AddOrderProps) => {
             <CardContent>
                 <form className={classes.form}>
                     <Typography className={classes.title} variant="h4" gutterBottom>
-                        Add User
+                        Add Order
                     </Typography>
 
                     <TextField required fullWidth id="title" label="Title" type="text" variant="outlined"
                                value={order.title} onChange={updateHandler} onBlur={formik.handleBlur}/>
-                    <TextField required fullWidth id={order.orderCustomer.customer.name} label="Customer Name" type="text" variant="outlined"
-                               value={order.orderCustomer.customer.name} onChange={updateHandler} onBlur={formik.handleBlur}/>
-                    <TextField required fullWidth id={order.orderCustomer.customer.company} label="Company" type="text" variant="outlined"
-                               value={order.orderCustomer.customer.company} onChange={updateHandler} onBlur={formik.handleBlur}/>
-                    <TextField required fullWidth id="phone" label="Phone" type="text" variant="outlined"
-                               value={order.orderCustomer.customer.phone} onChange={updateHandler} onBlur={formik.handleBlur}/>
+                    <TextField required fullWidth name="name" label="Customer Name" type="text" variant="outlined"
+                               value={order.orderCustomer.customer.name} onChange={updateCustomerField} onBlur={formik.handleBlur}/>
+                    <TextField required fullWidth name="company" label="Company" type="text" variant="outlined"
+                               value={order.orderCustomer.customer.company} onChange={updateCustomerField} onBlur={formik.handleBlur}/>
+                    <TextField required fullWidth name="phone" label="Phone" type="text" variant="outlined"
+                               value={order.orderCustomer.customer.phone} onChange={updateCustomerField} onBlur={formik.handleBlur}/>
 
-                    <FormControl>
+                    <FormControl className={classes.checkbox}>
                         <FormLabel>Product Name</FormLabel>
                         <FormGroup row>
                             <FormControlLabel control={<Checkbox onChange={checkHandler} color="primary" name="fridge"/>} value="1" label="fridge" />
@@ -101,8 +118,12 @@ const AddOrder = (props: AddOrderProps) => {
                         </FormGroup>
                     </FormControl>
 
-                    <TextField required fullWidth id="purchaseDate" label="Purchase Date" type="text" variant="outlined"
-                               value={order.purchase_date} onChange={updateHandler} onBlur={formik.handleBlur}/>
+                    {/*<TextField required fullWidth id="purchaseDate" label="Purchase Date" type="text" variant="outlined"*/}
+                    {/*           value={order.purchase_date} onChange={updateHandler} onBlur={formik.handleBlur}/>*/}
+                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                        <KeyboardDatePicker disableToolbar inputVariant="outlined" format="MM/dd/yyyy" margin="normal" id="date-picker-inline" label="Purchase Date" value={order.purchase_date}
+                            onChange={handleDateChange} KeyboardButtonProps={{'aria-label': 'change date',}}/>
+                    </MuiPickersUtilsProvider>
                     <TextField required fullWidth id="discount" label="Discount" type="text" variant="outlined"
                                value={order.discount} onChange={updateHandler} onBlur={formik.handleBlur}/>
 
